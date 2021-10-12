@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/5.0.0.alpha.3'>
+  <meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+  <link rel="canonical" href="http://lethewind.github.io/2021/10/11/generative adversarial network in medical imaging a review/"/>
+  <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta content="Lethe" name="application-name">
+  <meta content="Lethe" name="apple-mobile-web-app-title">
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <link rel="preload" href="/css/style.css?time=1634014532470" as="style">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"lethewind.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
+  <!-- 页面元数据 -->
+  <title>Generative adversarial network in medical imaging A review - Lethe</title>
+  <meta name="keywords" content="GAN, 生成对抗网络, Medical imaging, 医学图像,null">
   <meta name="description" content="Generative adversarial network in medical imaging: A reviewAbstractGenerative adversarial networks have gained a lot of attention in the computer vision community due to their capability of data gener">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Generative adversarial network in medical imaging A review">
@@ -27,190 +34,2111 @@
 <meta property="og:site_name" content="Lethe">
 <meta property="og:description" content="Generative adversarial network in medical imaging: A reviewAbstractGenerative adversarial networks have gained a lot of attention in the computer vision community due to their capability of data gener">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2021/10/09/zG6Bkgs3O2VWSpF.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/09/A5HREaYkfqcQoUF.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/09/5WkXtMze3TYsUl4.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/wj32VFk1fdTqelL.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/9tgPFwyAa71hezJ.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/Y4DblKTVL7n2Avs.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/dhsHbTnY9r75DZC.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/ynAJLSaCK2sD5rm.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/NTjGCkZ9hd2zYDI.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/6pTcJFyd58ln7sQ.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/FWp5HNtljGx8Cae.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/vp9rPDXHjbqh67E.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/Y2NRZuC87qgPwet.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/eZnBviVLNt1WXRO.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/10/vTxdQpm7NagLrE1.png">
-<meta property="og:image" content="https://i.loli.net/2021/10/11/wUQx8pWIi1dlaGM.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2021-10-11T05:41:49.000Z">
 <meta property="article:modified_time" content="2021-10-11T15:45:28.601Z">
 <meta property="article:author" content="Farewellswind">
 <meta property="article:tag" content="GAN, 生成对抗网络, Medical imaging, 医学图像">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/10/09/zG6Bkgs3O2VWSpF.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png">
+  <!-- feed -->
+    <link rel="alternate" href="/atom.xml" title="Lethe" type="application/atom+xml">
+  <!-- import meta -->
+  <!-- link -->
+  <!-- import link -->
+  <style>
+    /* 首屏样式 */
+    #safearea {
+  display: none;
+}
+/* 
+  * Workaround for Chrome bug, part 1
+  * Chunk rendering for all but the first article.
+  * /layout/_partial/scripts/content-visibility-scroll-fix.ejs
+*/
+.post-story + .post-story,
+article + article,
+.post-wrapper + .post-wrapper {
+  content-visibility: auto;
+  contain-intrinsic-size: 10px 500px;
+}
+:root {
+  --color-site-body: #f4f4f4;
+  --color-site-bg: #f4f4f4;
+  --color-site-inner: #fff;
+  --color-site-footer: #666;
+  --color-card: #fff;
+  --color-text: #444;
+  --color-block: #f6f6f6;
+  --color-inlinecode: #c74f00;
+  --color-codeblock: #fff7ea;
+  --color-h1: #3a3a3a;
+  --color-h2: #3a3a3a;
+  --color-h3: #333;
+  --color-h4: #444;
+  --color-h5: #555;
+  --color-h6: #666;
+  --color-p: #444;
+  --color-list: #666;
+  --color-list-hl: #36ac91;
+  --color-meta: #888;
+  --color-read-bkg: #e0d8c8;
+  --color-read-post: #f8f1e2;
+}
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+html {
+  color: var(--color-text);
+  width: 100%;
+  height: 100%;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-size: 16px;
+}
+html >::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+html >::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+html >::-webkit-scrollbar-thumb {
+  background: #44d7b6;
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+html >::-webkit-scrollbar-thumb:hover {
+  background: #ff5722;
+}
+body {
+  background-color: var(--color-site-body);
+  text-rendering: optimizelegibility;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body.modal-active {
+  overflow: hidden;
+}
+@media screen and (max-width: 680px) {
+  body.modal-active {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+a {
+  color: #1b79c4;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+a:hover {
+  color: #ff5722;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+ul,
+ol {
+  padding-left: 0;
+}
+ul li,
+ol li {
+  list-style: none;
+}
+header {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+img {
+  border: 0;
+  background: none;
+  max-width: 100%;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  height: 0;
+  border: 0;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-bottom: 1px solid rgba(68,68,68,0.1);
+}
+button,
+input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button {
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+@supports (backdrop-filter: blur(20px)) {
+  .blur {
+    background: rgba(255,255,255,0.9) !important;
+    backdrop-filter: saturate(200%) blur(20px);
+  }
+}
+.shadow {
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.shadow.floatable {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.shadow.floatable:hover {
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+}
+#l_cover {
+  min-height: 64px;
+}
+.cover-wrapper {
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100vh;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  color: var(--color-site-inner);
+  padding: 0 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -100px;
+}
+.cover-wrapper .cover-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+.cover-wrapper .cover-bg.lazyload:not(.loaded) {
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+}
+.cover-wrapper .cover-bg.lazyload.loaded {
+  animation-delay: 0s;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+}
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cover-wrapper#full {
+  height: calc(100vh + 100px);
+  padding-bottom: 100px;
+}
+.cover-wrapper#half {
+  max-height: 640px;
+  min-height: 400px;
+  height: calc(36vh - 64px + 200px);
+}
+.cover-wrapper #scroll-down {
+  width: 100%;
+  height: 64px;
+  position: absolute;
+  bottom: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+.cover-wrapper #scroll-down .scroll-down-effects {
+  color: #fff;
+  font-size: 24px;
+  line-height: 64px;
+  position: absolute;
+  width: 24px;
+  left: calc(50% - 12px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  animation: scroll-down-effect 1.5s infinite;
+  -webkit-animation: scroll-down-effect 1.5s infinite;
+  -khtml-animation: scroll-down-effect 1.5s infinite;
+  -moz-animation: scroll-down-effect 1.5s infinite;
+  -o-animation: scroll-down-effect 1.5s infinite;
+  -ms-animation: scroll-down-effect 1.5s infinite;
+}
+@-moz-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  margin-top: 64px;
+  margin-bottom: 100px;
+}
+.cover-wrapper .cover-body,
+.cover-wrapper .cover-body .top,
+.cover-wrapper .cover-body .bottom {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  max-width: 100%;
+}
+.cover-wrapper .cover-body .bottom {
+  margin-top: 32px;
+}
+.cover-wrapper .cover-body .title {
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-size: 3.125rem;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.cover-wrapper .cover-body .subtitle {
+  font-size: 20px;
+}
+.cover-wrapper .cover-body .logo {
+  max-height: 120px;
+  max-width: calc(100% - 4 * 16px);
+}
+@media screen and (min-height: 1024px) {
+  .cover-wrapper .cover-body .title {
+    font-size: 3rem;
+  }
+  .cover-wrapper .cover-body .subtitle {
+    font-size: 1.05rem;
+  }
+  .cover-wrapper .cover-body .logo {
+    max-height: 150px;
+  }
+}
+.cover-wrapper .cover-body .m_search {
+  position: relative;
+  max-width: calc(100% - 16px);
+  width: 320px;
+  vertical-align: middle;
+}
+.cover-wrapper .cover-body .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  width: 100%;
+}
+.cover-wrapper .cover-body .m_search .icon,
+.cover-wrapper .cover-body .m_search .input {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.cover-wrapper .cover-body .m_search .icon {
+  position: absolute;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  line-height: 2.5rem;
+  width: 32px;
+  top: 0;
+  left: 5px;
+  color: rgba(68,68,68,0.75);
+}
+.cover-wrapper .cover-body .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  height: 2.5rem;
+  width: 100%;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-size: 0.875rem;
+  -webkit-appearance: none;
+  padding-left: 36px;
+  border-radius: 1.4rem;
+  -webkit-border-radius: 1.4rem;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: var(--color-text);
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .cover-body .m_search .input {
+    padding-left: 36px;
+  }
+}
+.cover-wrapper .cover-body .m_search .input:hover {
+  background: rgba(255,255,255,0.8);
+}
+.cover-wrapper .cover-body .m_search .input:focus {
+  background: #fff;
+}
+.cover-wrapper .list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -khtml-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.cover-wrapper .list-h a {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 0;
+  -ms-flex: 1 0;
+  flex: 1 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  font-weight: 600;
+}
+.cover-wrapper .list-h a img {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  margin: 4px;
+  min-width: 40px;
+  max-width: 44px;
+}
+@media screen and (max-width: 768px) {
+  .cover-wrapper .list-h a img {
+    min-width: 36px;
+    max-width: 40px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .list-h a img {
+    margin: 2px 4px;
+    min-width: 32px;
+    max-width: 36px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .cover-wrapper .list-h a img {
+    min-width: 28px;
+    max-width: 32px;
+  }
+}
+.cover-wrapper {
+  max-width: 100%;
+}
+.cover-wrapper.search .bottom .menu {
+  margin-top: 16px;
+}
+.cover-wrapper.search .bottom .menu .list-h a {
+  white-space: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  align-items: baseline;
+  padding: 2px;
+  margin: 4px;
+  color: var(--color-site-inner);
+  opacity: 0.75;
+  -webkit-opacity: 0.75;
+  -moz-opacity: 0.75;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  border-bottom: 2px solid transparent;
+}
+.cover-wrapper.search .bottom .menu .list-h a i {
+  margin-right: 4px;
+}
+.cover-wrapper.search .bottom .menu .list-h a p {
+  font-size: 0.9375rem;
+}
+.cover-wrapper.search .bottom .menu .list-h a:hover,
+.cover-wrapper.search .bottom .menu .list-h a.active,
+.cover-wrapper.search .bottom .menu .list-h a:active {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  border-bottom: 2px solid var(--color-site-inner);
+}
+.cover-wrapper.dock .menu,
+.cover-wrapper.featured .menu,
+.cover-wrapper.focus .menu {
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+.cover-wrapper.dock .menu .list-h a,
+.cover-wrapper.featured .menu .list-h a,
+.cover-wrapper.focus .menu .list-h a {
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  line-height: 24px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-bottom: none;
+  text-align: center;
+  align-content: flex-end;
+  color: rgba(68,68,68,0.7);
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper.dock .menu .list-h a,
+  .cover-wrapper.featured .menu .list-h a,
+  .cover-wrapper.focus .menu .list-h a {
+    padding: 12px 8px;
+  }
+}
+.cover-wrapper.dock .menu .list-h a i,
+.cover-wrapper.featured .menu .list-h a i,
+.cover-wrapper.focus .menu .list-h a i {
+  margin: 8px;
+}
+.cover-wrapper.dock .menu .list-h a p,
+.cover-wrapper.featured .menu .list-h a p,
+.cover-wrapper.focus .menu .list-h a p {
+  font-size: 0.875rem;
+}
+.cover-wrapper.dock .menu .list-h a.active,
+.cover-wrapper.featured .menu .list-h a.active,
+.cover-wrapper.focus .menu .list-h a.active {
+  background: var(--color-card);
+  backdrop-filter: none;
+}
+.cover-wrapper.dock .menu .list-h a.active i,
+.cover-wrapper.featured .menu .list-h a.active i,
+.cover-wrapper.focus .menu .list-h a.active i,
+.cover-wrapper.dock .menu .list-h a.active i+p,
+.cover-wrapper.featured .menu .list-h a.active i+p,
+.cover-wrapper.focus .menu .list-h a.active i+p {
+  color: #44d7b6;
+}
+.cover-wrapper.dock .menu .list-h a.active img+p,
+.cover-wrapper.featured .menu .list-h a.active img+p,
+.cover-wrapper.focus .menu .list-h a.active img+p {
+  color: var(--color-text);
+}
+.cover-wrapper.dock .menu .list-h a:hover,
+.cover-wrapper.featured .menu .list-h a:hover,
+.cover-wrapper.focus .menu .list-h a:hover {
+  background: var(--color-card);
+}
+.cover-wrapper.dock .top {
+  margin-bottom: 48px;
+}
+.cover-wrapper.dock .menu {
+  background: rgba(255,255,255,0.5);
+  position: absolute;
+  bottom: 0;
+  max-width: 100%;
+}
+.cover-wrapper.dock .menu .list-h {
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  margin: 4px;
+}
+.cover-wrapper.dock .menu .list-h a+a {
+  margin-left: 4px;
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper.dock .menu .list-h {
+    overflow-x: scroll;
+  }
+  .cover-wrapper.dock .menu .list-h::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
+  .cover-wrapper.dock .menu .list-h::-webkit-scrollbar-track-piece {
+    background: transparent;
+  }
+  .cover-wrapper.dock .menu .list-h::-webkit-scrollbar-thumb {
+    background: #44d7b6;
+    cursor: pointer;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+  }
+  .cover-wrapper.dock .menu .list-h::-webkit-scrollbar-thumb:hover {
+    background: #ff5722;
+  }
+}
+@supports (backdrop-filter: blur(20px)) {
+  .cover-wrapper.dock .menu {
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: saturate(200%) blur(20px);
+  }
+}
+@font-face {
+  font-family: 'UbuntuMono';
+  src: url("https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Varela Round';
+  src: url("https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+.l_header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  background: var(--color-card);
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.l_header.auto {
+  transition: opacity 0.4s ease;
+  -webkit-transition: opacity 0.4s ease;
+  -khtml-transition: opacity 0.4s ease;
+  -moz-transition: opacity 0.4s ease;
+  -o-transition: opacity 0.4s ease;
+  -ms-transition: opacity 0.4s ease;
+  visibility: hidden;
+}
+.l_header.auto.show {
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  visibility: visible;
+}
+.l_header .container {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.l_header #wrapper {
+  height: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.l_header #wrapper .nav-main,
+.l_header #wrapper .nav-sub {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -khtml-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -o-justify-content: space-between;
+  -ms-justify-content: space-between;
+  align-items: center;
+}
+.l_header #wrapper .nav-main {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.l_header #wrapper.sub .nav-main {
+  transform: translateY(-64px);
+  -webkit-transform: translateY(-64px);
+  -khtml-transform: translateY(-64px);
+  -moz-transform: translateY(-64px);
+  -o-transform: translateY(-64px);
+  -ms-transform: translateY(-64px);
+}
+.l_header #wrapper .nav-sub {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  height: 64px;
+  width: calc(100% - 2 * 16px);
+  position: absolute;
+}
+.l_header #wrapper .nav-sub ::-webkit-scrollbar {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (min-width: 2048px) {
+  .l_header #wrapper .nav-sub {
+    max-width: 55vw;
+    margin: auto;
+  }
+}
+.l_header #wrapper.sub .nav-sub {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+}
+.l_header #wrapper .title {
+  position: relative;
+  color: var(--color-text);
+  padding-left: 24px;
+  max-height: 64px;
+}
+.l_header #wrapper .nav-main .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  line-height: 64px;
+  padding: 0 24px;
+  font-size: 1.25rem;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+}
+.l_header #wrapper .nav-main .title img {
+  height: 64px;
+}
+.l_header .nav-sub {
+  max-width: 1080px;
+  margin: auto;
+}
+.l_header .nav-sub .title {
+  font-weight: bold;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  line-height: 1.2;
+  max-height: 64px;
+  white-space: normal;
+  flex-shrink: 1;
+}
+.l_header .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  line-height: 64px;
+  align-items: center;
+}
+.l_header .switcher .s-toc {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .l_header .switcher .s-toc {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+  }
+}
+.l_header .switcher >li {
+  height: 48px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  margin: 2px;
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li {
+    margin: 0 1px;
+    height: 48px;
+  }
+}
+.l_header .switcher >li >a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0.85em 1.1em;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  color: #44d7b6;
+}
+.l_header .switcher >li >a:hover {
+  border: none;
+}
+.l_header .switcher >li >a.active,
+.l_header .switcher >li >a:active {
+  border: none;
+  background: var(--color-site-bg);
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li >a {
+    width: 36px;
+    height: 48px;
+  }
+}
+.l_header .nav-sub .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+}
+.l_header .m_search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  height: 64px;
+  width: 240px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (max-width: 1024px) {
+  .l_header .m_search {
+    width: 44px;
+    min-width: 44px;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+  }
+  .l_header .m_search:hover {
+    width: 240px;
+  }
+  .l_header .m_search:hover input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search:hover .input {
+    width: 100%;
+  }
+  .l_header .m_search:hover .input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search {
+    min-width: 0;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.l_header .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.l_header .m_search .icon {
+  position: absolute;
+  width: 36px;
+  left: 5px;
+  color: var(--color-meta);
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .icon {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+.l_header .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 1.3;
+  width: 100%;
+  color: var(--color-text);
+  background: #fafafa;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding-left: 40px;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search .input:focus {
+    box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .input {
+    background: var(--color-block);
+    padding-left: 8px;
+    border: none;
+  }
+  .l_header .m_search .input:hover,
+  .l_header .m_search .input:focus {
+    border: none;
+  }
+}
+@media (max-width: 500px) {
+  .l_header .m_search {
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    position: absolute;
+    background: #fff;
+    transition: all 0.28s ease;
+    -webkit-transition: all 0.28s ease;
+    -khtml-transition: all 0.28s ease;
+    -moz-transition: all 0.28s ease;
+    -o-transition: all 0.28s ease;
+    -ms-transition: all 0.28s ease;
+  }
+  .l_header .m_search .input {
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    margin-left: 16px;
+    padding-left: 16px;
+  }
+  .l_header.z_search-open .m_search {
+    width: 100%;
+  }
+  .l_header.z_search-open .m_search .input {
+    width: calc(100% - 120px);
+  }
+}
+ul.m-pc >li>a {
+  color: inherit;
+  border-bottom: 2px solid transparent;
+}
+ul.m-pc >li>a:active,
+ul.m-pc >li>a.active {
+  border-bottom: 2px solid #44d7b6;
+}
+ul.m-pc li:hover >ul.list-v,
+ul.list-v li:hover >ul.list-v {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.nav-list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  align-items: stretch;
+}
+ul.nav-list-h>li {
+  position: relative;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  height: 100%;
+  line-height: 2.4;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+ul.nav-list-h>li >a {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+}
+ul.list-v {
+  z-index: 1;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: absolute;
+  background: var(--color-card);
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  margin-top: -6px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 8px 0;
+}
+ul.list-v.show {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.list-v hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+ul.list-v >li {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+ul.list-v >li.header {
+  font-size: 0.78125rem;
+  font-weight: bold;
+  line-height: 2em;
+  color: var(--color-meta);
+  margin: 8px 16px 4px;
+}
+ul.list-v >li.header i {
+  margin-right: 8px;
+}
+ul.list-v >li ul {
+  margin-left: 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: -40px;
+}
+ul.list-v .aplayer-container {
+  min-height: 64px;
+  padding: 6px 16px;
+}
+ul.list-v >li>a {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  color: var(--color-list);
+  font-size: 0.875rem;
+  font-weight: bold;
+  line-height: 36px;
+  padding: 0 20px 0 16px;
+  text-overflow: ellipsis;
+  margin: 0 4px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+@media screen and (max-width: 1024px) {
+  ul.list-v >li>a {
+    line-height: 40px;
+  }
+}
+ul.list-v >li>a >i {
+  margin-right: 8px;
+}
+ul.list-v >li>a:active,
+ul.list-v >li>a.active {
+  color: var(--color-list-hl);
+}
+ul.list-v >li>a:hover {
+  color: var(--color-list-hl);
+  background: var(--color-site-bg);
+}
+.l_header .menu >ul>li>a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding: 0 8px;
+}
+.l_header .menu >ul>li>a >i {
+  margin-right: 4px;
+}
+.l_header ul.nav-list-h>li {
+  color: var(--color-list);
+  line-height: 64px;
+}
+.l_header ul.nav-list-h>li >a {
+  max-height: 64px;
+  overflow: hidden;
+  color: inherit;
+}
+.l_header ul.nav-list-h>li >a:active,
+.l_header ul.nav-list-h>li >a.active {
+  color: #44d7b6;
+}
+.l_header ul.nav-list-h>li:hover>a {
+  color: var(--color-list-hl);
+}
+.l_header ul.nav-list-h>li i.music {
+  animation: rotate-effect 1.5s linear infinite;
+  -webkit-animation: rotate-effect 1.5s linear infinite;
+  -khtml-animation: rotate-effect 1.5s linear infinite;
+  -moz-animation: rotate-effect 1.5s linear infinite;
+  -o-animation: rotate-effect 1.5s linear infinite;
+  -ms-animation: rotate-effect 1.5s linear infinite;
+}
+@-moz-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+.menu-phone li ul.list-v {
+  right: calc(100% - 0.5 * 16px);
+}
+.menu-phone li ul.list-v ul {
+  right: calc(100% - 0.5 * 16px);
+}
+#wrapper {
+  max-width: 1080px;
+  margin: auto;
+}
+@media screen and (min-width: 2048px) {
+  #wrapper {
+    max-width: 55vw;
+  }
+}
+#wrapper .menu {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
+  margin: 0 16px 0 0;
+}
+#wrapper .menu .list-v ul {
+  left: calc(100% - 0.5 * 16px);
+}
+.menu-phone {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: 16px;
+  right: 8px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.menu-phone ul {
+  right: calc(100% - 0.5 * 16px);
+}
+@media screen and (max-width: 500px) {
+  .menu-phone {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: block;
+  }
+}
+.l_header {
+  max-width: 65vw;
+  left: calc((100% - 65vw) * 0.5);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+@media screen and (max-width: 2048px) {
+  .l_header {
+    max-width: 1112px;
+    left: calc((100% - 1112px) * 0.5);
+  }
+}
+@media screen and (max-width: 1112px) {
+  .l_header {
+    left: 0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .l_header #wrapper .nav-main .title {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .l_header #wrapper .nav-sub {
+    width: 100%;
+  }
+  .l_header #wrapper .nav-sub .title {
+    overflow-y: scroll;
+    margin-top: 2px;
+    padding: 8px 16px;
+  }
+  .l_header #wrapper .switcher {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+    margin-right: 8px;
+  }
+  .l_header .menu {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .list-v li {
+    max-width: 270px;
+  }
+}
+#u-search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 60px 20px;
+  z-index: 1001;
+}
+@media screen and (max-width: 680px) {
+  #u-search {
+    padding: 0px;
+  }
+}
 
-<link rel="canonical" href="http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
+  </style>
+  <link rel="stylesheet" href="/css/style.css?time=1634014532470" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css?time=1634014532470"></noscript>
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+    '.kill-t{'+
+      'font-size: 2rem;'+
+    '}'+
+    '.kill-c{'+
+      'font-size: 1.2rem;'+
+    '}'+
+		'#l_header,#l_body{'+
+			'display: none;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        `<span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>`+
+        `<span class="kill-c">微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</span><br/>`+
+        `<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/WindowsForBusiness/End-of-IE-support"><strong>了解详情 ></strong></a>`+
+    '</div>');
 </script>
 
-  <title>Generative adversarial network in medical imaging A review | Lethe</title>
-  
 
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+    .kill-t{
+      font-size: 2rem;
+    }
+    .kill-c{
+      font-size: 1.2rem;
+    }
+		#l_header,#l_body{
+			display: none;
+		}
+	</style>
+    <div class="kill-noscript">
+        <span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>
+        <span class="kill-c">本页面需要浏览器支持（启用）JavaScript</span><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="Lethe" type="application/atom+xml">
+
+  <!-- Custom Files head begin-->
+  
+  <!-- Custom Files head end-->
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
+        
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
+        
+      </ul>
     </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Lethe</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">Farewellswind Blog</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
           
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png' alt="This is a picture without description" />
+          
+          
+          
+        </a>
+      
 
-          <div class="content post posts-expand">
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/friends/" title="友链"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/about/" title="关于"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/friends/" title="友链"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                href="/about/" title="关于"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+
+      <!-- Custom Files header begin -->
+      
+      <!-- Custom Files header end -->
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+      <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
+      <div id="none" class='cover-wrapper post dock' style="display: none;">
+        
+  <div class='cover-bg lazyload placeholder' data-bg="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture"></div>
+
+<div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Volantis</p>
+    
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/v4/getting-started/"
+              
+              
+              active-action="action-v4getting-started">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg' alt="This is a picture without description" ><p>文档</p>
+            </a>
+          
+            <a href="/faqs/"
+              
+              
+              active-action="action-faqs">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg' alt="This is a picture without description" ><p>帮助</p>
+            </a>
+          
+            <a href="/examples/"
+              
+              
+              active-action="action-examples">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg' alt="This is a picture without description" ><p>示例</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              active-action="action-contributors">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg' alt="This is a picture without description" ><p>社区</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              active-action="action-archives">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg' alt="This is a picture without description" ><p>博客</p>
+            </a>
+          
+            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
+              
+              
+              active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f9ec.svg' alt="This is a picture without description" ><p>源码</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+      </div>
+    
+  
+</div>
+
+      <div id="safearea">
+        <div class="body-wrapper">
+          
+<div id="l_main" class=''>
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Lethe">
+  </span>
+  
+
+
+  
+    <span hidden>
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title" itemprop="name headline">
+        Generative adversarial network in medical imaging A review
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    " class="lazyload" data-srcset="" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==<img itemprop="image" src="" alt="This is a picture without description" >
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
             
 
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Farewellswind">
-      <meta itemprop="description" content="Blog to record sth. powered by GitPages & Hexo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lethe">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Generative adversarial network in medical imaging A review
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-10-11 13:41:49 / 修改时间：23:45:28" itemprop="dateCreated datePublished" datetime="2021-10-11T13:41:49+08:00">2021-10-11</time>
-            </span>
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2021-10-11T13:41:49+08:00">
+  <a class='notlink' href="/" onclick="return false;" title="Click me!" >
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年10月11日</p>
+  </a>
+</div>
 
           
+        
+          
+            
 
-        </div>
-      </header>
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
+    
+  </div>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
-      
-        <h1 id="Generative-adversarial-network-in-medical-imaging-A-review"><a href="#Generative-adversarial-network-in-medical-imaging-A-review" class="headerlink" title="Generative adversarial network in medical imaging: A review"></a>Generative adversarial network in medical imaging: A review</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>Generative adversarial networks have gained a lot of attention in the computer vision community due to their capability of data generation without explicitly modelling the probability density function. The adversarial loss brought by the discriminator provides a clever way of incorporating unlabeled samples into training and imposing higher order consistency. This has proven to be useful in many cases, such as domain adaptation, data augmentation, and image-to-image translation. These properties have attracted researchers in the medical imaging community, and we have seen rapid adoption in many traditional and novel applications, such as image reconstruction, segmentation, detection, classification, and cross- modality synthesis. Based on our observations, this trend will continue and we therefore conducted a review of recent advances in medical imaging using the adversarial training scheme with the hope of benefiting researchers interested in this technique.</p>
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h1 id="Generative-adversarial-network-in-medical-imaging-A-review"><a href="#Generative-adversarial-network-in-medical-imaging-A-review" class="headerlink" title="Generative adversarial network in medical imaging: A review"></a>Generative adversarial network in medical imaging: A review</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><div class="story post-story"><p>Generative adversarial networks have gained a lot of attention in the computer vision community due to their capability of data generation without explicitly modelling the probability density function. The adversarial loss brought by the discriminator provides a clever way of incorporating unlabeled samples into training and imposing higher order consistency. This has proven to be useful in many cases, such as domain adaptation, data augmentation, and image-to-image translation. These properties have attracted researchers in the medical imaging community, and we have seen rapid adoption in many traditional and novel applications, such as image reconstruction, segmentation, detection, classification, and cross- modality synthesis. Based on our observations, this trend will continue and we therefore conducted a review of recent advances in medical imaging using the adversarial training scheme with the hope of benefiting researchers interested in this technique.</p>
 <p>生成对抗网络在计算机视觉社区中获得了很多关注，因为它们无需对概率密度函数进行显式建模即可生成数据。判别器带来的对抗性损失提供了一种巧妙的方法，可以将未标记的样本纳入训练并施加更高阶的一致性。这已被证明在许多情况下都很有用，例如域适应、数据增强和图像到图像的转换。这些特性吸引了医学成像界的研究人员，我们已经看到在许多传统和新颖的应用中迅速采用，例如图像重建、分割、检测、分类和跨模态合成。 根据我们的观察，这种趋势将继续下去，因此我们对使用对抗性训练的医学成像的最新进展进行了整理，希望使对这项技术感兴趣的研究人员受益。</p>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>With the resurgence of deep learning in computer vision starting from 2012 ( Krizhevsky et al., 2012 ), the adoption of deep learning methods in medical imaging has increased dramatically. It is estimated that there were over 400 papers published in 2016 and 2017 in major medical imaging related conference venues and journals ( Litjens et al., 2017 ). The wide adoption of deep learning in the medical imaging community is due to its demonstrated potential to complement image interpretation and augment image representation and classification. In this article, we focus on one of the most interesting recent breakthroughs in the field of deep learning - generative adversarial networks (GANs) - and their potential applications in the field of medical imaging.</p>
+</div><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><div class="story post-story"><p>With the resurgence of deep learning in computer vision starting from 2012 ( Krizhevsky et al., 2012 ), the adoption of deep learning methods in medical imaging has increased dramatically. It is estimated that there were over 400 papers published in 2016 and 2017 in major medical imaging related conference venues and journals ( Litjens et al., 2017 ). The wide adoption of deep learning in the medical imaging community is due to its demonstrated potential to complement image interpretation and augment image representation and classification. In this article, we focus on one of the most interesting recent breakthroughs in the field of deep learning - generative adversarial networks (GANs) - and their potential applications in the field of medical imaging.</p>
 <p>随着 2012 年计算机视觉深度学习的复苏（Krizhevsky et al., 2012），深度学习方法在医学成像中的应用急剧增加。 据估计，2016年和2017年在主要医学影像相关会议和期刊上发表的论文超过400篇（Litjens et al., 2017）。深度学习在医学成像界的广泛采用是由于其在补充图像解释和增强图像表示和分类方面表现出的潜力。在本文中，我们关注深度学习领域最近最有趣的突破之一——生成对抗网络 (GAN)——及其在医学成像领域的潜在应用。</p>
 <p>GANs are a special type of neural network model where two networks are trained simultaneously, with one focused on image generation and the other centered on discrimination. The ad-versarial training scheme has gained attention in both academia and industry due to its usefulness in counteracting domain shift, and effectiveness in generating new image samples. This model has achieved state-of-the-art performance in many image generation tasks, including text-to-image synthesis ( Xu et al., 2017 ), super-resolution ( Ledig et al., 2017 ), and image-to-image translation ( Zhu et al., 2017 ).</p>
 <p>GAN 是一种特殊类型的神经网络模型，其中两个网络同时训练，一个专注于图像生成，另一个专注于判别。由于对抗域迁移的有用性和生成新图像样本的有效性，对抗性训练方案在学术界和业界都受到关注。该模型在许多图像生成任务中取得了最先进的性能，包括文本到图像合成（Xu et al., 2017）、超分辨率（Ledig et al., 2017）和图像到图像转换（Zhu et al., 2017）。</p>
@@ -218,19 +2146,19 @@
 <p>与起源于 1980 年代（Fukushima 和 Miyake，1982）的深度学习不同，对抗训练的概念相对较新，并且最近取得了重大进展（Goodfellow 等，2014）。 本文概述了 GAN，描述了它们在医学成像中的有前景的应用，并确定了一些需要解决的剩余挑战，以使其成功应用于其他医学成像相关任务。</p>
 <p>To present a comprehensive overview of all relevant works on GANs in medical imaging, we searched databases including PubMed, arXiv, proceedings of the International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI), SPIE Medical Imaging, IEEE International Symposium on Biomedical Imaging (ISBI), and International conference on Medical Imaging with Deep Learning (MIDL). We also incorporated cross referenced works not identified in the above search process. Since there are research publications coming out every month, without losing generality, we set the cut offtime of the search as January 1st, 2019. Works on arXiv that report only preliminary results are excluded from this review. Descriptive statistics of these papers based on task, imaging modality and year can be found in Fig. 1 .</p>
 <p>为了全面概述医学成像中 GAN 的所有相关工作，我们检索了包括 PubMed、arXiv、医学图像计算和计算机辅助干预国际会议 (MICCAI)、SPIE 医学成像、IEEE 生物医学成像国际研讨会论文集在内的数据库 (ISBI) 和深度学习医学成像国际会议 (MIDL)。 我们还合并了上述搜索过程中未确定的交叉引用作品。 由于每个月都有研究发表，在不失一般性的情况下，我们将搜索截止时间设置为 2019 年 1 月 1 日。 arXiv 上仅报告初步结果的作品被排除在本次审查之外。 这些论文基于任务、成像方式和年份的描述性统计可以在图 1 中找到。</p>
-<p><img src="https://i.loli.net/2021/10/09/zG6Bkgs3O2VWSpF.png" alt="image-20211009191958548"></p>
+<p><img src="https://i.loli.net/2021/10/09/zG6Bkgs3O2VWSpF.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/09/zG6Bkgs3O2VWSpF.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211009191958548"></p>
 <p>Fig. 1. (a) Categorization of GAN related papers according to canonical tasks. (b) Categorization of GAN related papers according to imaging modality. (c) Number of GAN related papers published from 2014. Note that some works performed various tasks and conducted evaluation on datasets with different modalities. We counted these works multiple times in plotting these graphs. Works related to cross domain image transfer were counted based on the source domain. The statistics presented in figure (a) and (b) are based on papers published on or before January 1st, 2019.</p>
 <p>图1..（a） 根据规范任务对与GAN相关的论文进行分类。（b） 根据影像学形态分类与GAN相关的论文。（c） 2014年发表的与GAN相关的论文数量。请注意，一些工作执行了各种任务，并对不同模式的数据集进行了评估。在绘制这些图表时，我们对这些作品进行了多次计数。基于源域统计与跨域图像传输相关的工作。图（a）和（b）中的统计数据基于2019年1月1日或之前发表的论文。</p>
 <p>The remainder of the paper is structured as follows. We begin with a brief introduction of the principles of GANs and some of its structural variants in Section 2 . It is followed by a com- prehensive review of medical image analysis tasks using GANs in Section 3 including but not limited to the fields of radiology, histopathology and dermatology. We categorize all the works according to canonical tasks: reconstruction, image synthesis, segmentation, classification, detection, registration, and others. Section 4 summarizes the review and discusses prospective applications and identifies open challenges.</p>
 <p>本文其余部分的结构如下。在第2节中，我们首先简要介绍GANs的原理及其一些结构变体。第3节对使用GANs的医学图像分析任务进行了全面回顾，包括但不限于放射学、组织病理学和皮肤学领域。我们根据标准任务对所有工作进行分类：重建、图像合成、分割、分类、检测、配准等。第4节总结了审查，讨论了潜在的应用，并确定了存在的挑战。</p>
-<h2 id="2-Background"><a href="#2-Background" class="headerlink" title="2. Background"></a>2. Background</h2><h3 id="2-1-Vanilla-GAN"><a href="#2-1-Vanilla-GAN" class="headerlink" title="2.1 Vanilla GAN"></a>2.1 Vanilla GAN</h3><p>The vanilla GAN ( Goodfellow et al., 2014 ) is a generative model that was designed for directly drawing samples from the desired data distribution without the need to explicitly model the underlying probability density function. It consists of two neural networks: the generator $G$ and the discriminator $D$. The input to $G$, $z$ is pure random noise sampled from a prior distribution $p(z)$, which is commonly chosen to be a Gaussian or a uniform distribution for simplicity. The output of $G$, $x_g$ is expected to have visual similarity with the real sample $x_r$ that is drawn from the real data distribution $p_r(x)$. We denote the non-linear mapping function learned by $G$ parametrized by $θ_g$ as $x_g=G(z;θ_g)$ . The input to $D$ is either a real or generated sample. The output of $D$, $y_1$ is a single value indicating the probability of the input being a real or fake sample. The mapping learned by $D$ parametrized by $θ_d$ is denoted as $y_1=D(x;θ_d) $. The generated samples form a distribution $p_g ( x )$ which is desired to be an approximation of $p_r( x )$ after successful training. The top of Fig. 2 shows an illustration of a vanilla GAN’s configuration. G in this example is generating a 2D CT slice depicting a lung nodule.</p>
+</div><h2 id="2-Background"><a href="#2-Background" class="headerlink" title="2. Background"></a>2. Background</h2><div class="story post-story"><h3 id="2-1-Vanilla-GAN"><a href="#2-1-Vanilla-GAN" class="headerlink" title="2.1 Vanilla GAN"></a>2.1 Vanilla GAN</h3><p>The vanilla GAN ( Goodfellow et al., 2014 ) is a generative model that was designed for directly drawing samples from the desired data distribution without the need to explicitly model the underlying probability density function. It consists of two neural networks: the generator $G$ and the discriminator $D$. The input to $G$, $z$ is pure random noise sampled from a prior distribution $p(z)$, which is commonly chosen to be a Gaussian or a uniform distribution for simplicity. The output of $G$, $x_g$ is expected to have visual similarity with the real sample $x_r$ that is drawn from the real data distribution $p_r(x)$. We denote the non-linear mapping function learned by $G$ parametrized by $θ_g$ as $x_g=G(z;θ_g)$ . The input to $D$ is either a real or generated sample. The output of $D$, $y_1$ is a single value indicating the probability of the input being a real or fake sample. The mapping learned by $D$ parametrized by $θ_d$ is denoted as $y_1=D(x;θ_d) $. The generated samples form a distribution $p_g ( x )$ which is desired to be an approximation of $p_r( x )$ after successful training. The top of Fig. 2 shows an illustration of a vanilla GAN’s configuration. G in this example is generating a 2D CT slice depicting a lung nodule.</p>
 <p>Vanilla GAN（Goodfello et al.，2014）是一种生成模型，设计用于直接从所需数据分布中提取样本，而无需显式建模基础概率密度函数。它由两个神经网络组成：生成器$G$和判别器$D$。$G$的输入$z$是从先验分布$p(z)$中采样的纯随机噪声，为简单起见，通常选择高斯分布或均匀分布。$G$的输出$x_g$预期与从真实数据分布$p_r(x)$中提取的真实样本$x_r$具有视觉相似性。我们将$G$学习的非线性映射函数表示为$x_g=G(z;θ_G)$。$D$的输入要么是真实的样本，要么是生成的样本。$D$的输出$y_1$是一个单一值，表示输入为真实或虚假样本的概率。由$D$学习并由$θ_d$参数化的映射表示为$y_1=D(x;θ_D)$。生成的样本形成一个分布$p_g(x)$，在成功训练后，该分布期望是$p_r(x)$的近似值。图2的顶部示出了GAN的配置的图示。在本例中，G生成了一个描绘肺结节的2D CT切片。</p>
-<p><img src="https://i.loli.net/2021/10/09/A5HREaYkfqcQoUF.png" alt="image-20211009201708590"></p>
+<p><img src="https://i.loli.net/2021/10/09/A5HREaYkfqcQoUF.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/09/A5HREaYkfqcQoUF.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211009201708590"></p>
 <p>Fig. 2. Schematic view of the vanilla GAN for synthesis of lung nodule on CT images. Top of the figure shows the network configuration. The part below shows the input, output and the internal feature representations of the generator $G$ and discriminator $D$. $G$ transforms a sample $z$ from $p ( z )$ into a generated nodule $x_g$ . $D$ is a binary classifier that differentiates the generated and real images of lung nodule formed by $x_g$ and $x_r$ respectively.</p>
 <p>图2.CT图像上用于合成肺结节的香草甘的示意图。图的顶部显示了网络配置。下面的部分显示了生成器$G$和判别器$D$的输入、输出和内部特征表示。$G$将样本$z$从$p(z)$转换为生成的结节$x_g$，$D$是一个二值分类器，用于区分由$x_g$和$x_r$分别形成的肺结节的生成图像和真实图像。</p>
 <p>$D$’s objective is to differentiate these two groups of images whereas the generator $G$ is trained to confuse the discriminator $D$ as much as possible. Intuitively, $G$ could be viewed as a forger trying to produce some quality counterfeit material, and $D$ could be regarded as the police officer trying to detect the forged items. In an alternative view, we can perceive $G$ as receiving a reward signal from $D$ depending upon whether the generated data is accurate or not. The gradient information is back propagated from $D$ to $G$, so $G$ adapts its parameters in order to produce an output image that can fool $D$. The training objectives of $D$ and $G$ can be expressed mathematically as:</p>
 <p>$D$的目标是区分这两组图像，而生成器$G$经过训练以尽可能混淆判别器$D$。直觉上，$G$可以被视为一个试图制造一些高质量假冒材料的伪造者，$D$可以被视为试图检测伪造物品的警官。在另一种观点中，我们可以将$G$视为从$D$接收到激励信号，这取决于生成的数据是否准确。梯度信息从$D$反向传播到$G$，因此$G$调整其参数，以产生可以愚弄$D$的输出图像。$D$和$G$的训练目标可以数学表示为：</p>
-<p><img src="https://i.loli.net/2021/10/09/5WkXtMze3TYsUl4.png" alt="image-20211009203028462"></p>
+<p><img src="https://i.loli.net/2021/10/09/5WkXtMze3TYsUl4.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/09/5WkXtMze3TYsUl4.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211009203028462"></p>
 <p>As can be seen, $D$ is simply a binary classifier with a maximum log likelihood objective. If the discriminator $D$ is trained to optimality before the next generator $G$ updates, then minimizing $\cal{L}\rm{^{GAN}_G}$ is proven to be equivalent to minimizing the Jensen–Shannon (JS) divergence between $p_r(x)$ and $p_g(x)$ ( Goodfellow et al., 2014 ). The desired outcome after training is that samples formed by $x_g$ should approximate the real data distribution $p_r(x)$.</p>
 <p>可以看出，$D$只是一个具有<a href="####%E6%9C%80%E5%A4%A7%E5%AF%B9%E6%95%B0%E4%BC%BC%E7%84%B6%E7%9B%AE%E6%A0%87">最大对数似然目标</a>的二分类器。如果在下一个生成器$G$更新之前，将判别器$D$训练为最优，那么最小化$\cal{L}\rm{^{GAN}_G}$被证明等同于最小化$p_r(x)$和$p_g(x)$之间的Jensen–Shannon(JS)散度（Goodfello等人，2014）。训练后的预期结果是，由$x_g$形成的样本应近似于实际数据分布$p_r(x)$。</p>
 <h3 id="2-2-Challenges-in-optimizing-GANs"><a href="#2-2-Challenges-in-optimizing-GANs" class="headerlink" title="2.2 Challenges in optimizing GANs"></a>2.2 Challenges in optimizing GANs</h3><p>The above GAN training objective is regarded as a saddle point optimization problem ( Yadav et al., 2018 ) and the training is often accomplished by gradient-based methods. G and D are trained alternately from scratch so that they may evolve together. However, there is no guarantee of balance between the training of G and D with the JS divergence. As a consequence, one network may inevitably be more powerful than the other, which in most cases is D. When D becomes too strong as opposed to G, the generated samples become too easy to be separated from real ones, thus reaching a stage where gradients from D approach zero, providing no guidance for further training of G. This hap- pens more frequently when generating high resolution images due to the difficulty of generating meaningful high frequency details.</p>
@@ -255,15 +2183,15 @@
 <p>从噪声矢量直接生成高分辨率图像是困难的，因此一些工作建议以渐进的方式处理它。在LAPGAN（图3 i）中，Denton等人（2015）提出了一组GANs，每个GANs都向生成的图像中添加了更高频率的细节。在SGAN中，也使用了级联的GAN，但每个GAN生成越来越低级别的表示（Huang等人，2017），这与从差别训练模型中提取的层次表示进行了比较。Karras等人（2017年）采用了另一种方法，即通过向生成器和判别器添加新层，而不是在前一层（PGGAN）的顶部堆叠另一层GAN，逐步增加生成器和判别器。这种进步的想法也在条件设置中得到了探索（Wang等人，2018年）。最近，Karras et al.（2019）提出了一种基于样式的生成器体系结构（styleGAN），其中不直接将潜在代码z提供给生成器的输入，他们首先将该代码转换为一个中间潜在空间，然后使用它来缩放和移动从每个卷积层计算的归一化图像特征响应。类似地，Park等人（2019）提出了SPADE，其中<a href="####%E5%88%86%E5%89%B2%E6%8E%A9%E6%A8%A1">分割掩模</a>通过空间自适应归一化层注入生成器。发现这种条件设置比直接将掩码提供给生成器更好地保留掩码的语义布局。</p>
 <p>Schematic illustrations of the most representative GANs are shown in Fig. 3 . They are GAN, CatGAN, EBGAN/BEGAN, ALI/BiGAN, InfoGAN, ACGAN, VAEGAN, CGAN, LAPGAN, SGAN. Three popular image-to-image translation cGANs (pix2pix, CycleGAN, and UNIT) are shown in Fig. 4 . For a more in-depth review and empirical evaluation of these different variants of GAN, we refer the reader to Huang et al. (2018) , Creswell et al. (2018) and Kurach et al. (2018) .</p>
 <p>图3显示了最具代表性的GAN的示意图。他们是GAN、CatGAN、EBGAN/Begin、ALI/BiGAN、InfoGAN、ACGAN、VAEGAN、CGAN、LAPGAN、SGAN。图4中显示了三种流行的图像到图像转换cgan（pix2pix、CycleGAN和UNIT）。为了更深入地回顾和实证评估这些不同的GAN变体，我们请读者参考Huang et al.（2018）、Creswell et al.（2018）和Kurach et al.（2018）。</p>
-<p><img src="https://i.loli.net/2021/10/10/wj32VFk1fdTqelL.png" alt="image-20211010111605807"></p>
+<p><img src="https://i.loli.net/2021/10/10/wj32VFk1fdTqelL.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/wj32VFk1fdTqelL.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010111605807"></p>
 <p>Fig. 3. A schematic view of variants of GAN. c represents the conditional vector. In CGAN and ACGAN, c is the discrete categorical code (e.g. one hot vector) that encodes class labels and in InfoGAN it can also be continuous code that encodes attributes. $x_g$ generally refers to the generated image but can also be internal representations as in<br>SGAN.</p>
 <p>图3. GAN变体的示意图。c表示条件向量。在CGAN和ACGAN中，c是编码类标签的离散分类代码（例如，一个独热向量），在InfoGAN中，c也可以是编码属性的连续代码。$x_g$通常指生成的图像，但也可以是SGAN中的内部表示。</p>
-<p><img src="https://i.loli.net/2021/10/10/9tgPFwyAa71hezJ.png" alt="image-20211010211408002"></p>
+<p><img src="https://i.loli.net/2021/10/10/9tgPFwyAa71hezJ.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/9tgPFwyAa71hezJ.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010211408002"></p>
 <p>Fig. 4. cGAN frameworks for image-to-image translation. pix2pix requires aligned training data whereas this constraint is relaxed in CycleGAN but usually suffers from performance loss. Note that in (a), we chose reconstruction loss as an example of target consistency. This supervision is task related and can take many other different forms. (c) It consists of two VAEGANs with shared latent vector in the VAE part.</p>
 <p>图4. 用于图像到图像翻译的CGA框架。pix2pix需要对齐的训练数据，而这种约束在CycleGAN中是放松的，但通常会受到性能损失的影响。注意，在(a)中，我们选择重建损失作为目标一致性的示例。这种监督与任务相关，可以采取许多其他不同形式。(c)它由两个在VAE部分具有共享潜在向量的Vaegan组成。</p>
-<h2 id="3-Applications-in-medical-imaging"><a href="#3-Applications-in-medical-imaging" class="headerlink" title="3. Applications in medical imaging"></a>3. Applications in medical imaging</h2><p>There are generally two ways GANs are used in medical imaging. The first is focused on the generative aspect, which can help in exploring and discovering the underlying structure of training data and learning to generate new images. This property makes GANs very promising in coping with data scarcity and patient privacy. The second focuses on the discriminative aspect, where the discriminator D can be regarded as a learned prior for normal images so that it can be used as regularizer or detector when presented with abnormal images. Fig. 5 provides examples of GAN related applications, with examples (a), (b), (c), (d), (e), (f) that focus on the generative aspect and example (g) that exploits the discriminative aspect. In the following subsections, in order to help the readers find applications of their interest, we categorized all the reviewed articles into canonical tasks: reconstruction, image synthesis, segmentation, classification, detection, registration, and others.</p>
+</div><h2 id="3-Applications-in-medical-imaging"><a href="#3-Applications-in-medical-imaging" class="headerlink" title="3. Applications in medical imaging"></a>3. Applications in medical imaging</h2><div class="story post-story"><p>There are generally two ways GANs are used in medical imaging. The first is focused on the generative aspect, which can help in exploring and discovering the underlying structure of training data and learning to generate new images. This property makes GANs very promising in coping with data scarcity and patient privacy. The second focuses on the discriminative aspect, where the discriminator D can be regarded as a learned prior for normal images so that it can be used as regularizer or detector when presented with abnormal images. Fig. 5 provides examples of GAN related applications, with examples (a), (b), (c), (d), (e), (f) that focus on the generative aspect and example (g) that exploits the discriminative aspect. In the following subsections, in order to help the readers find applications of their interest, we categorized all the reviewed articles into canonical tasks: reconstruction, image synthesis, segmentation, classification, detection, registration, and others.</p>
 <p>在医学成像中，GANs通常有两种使用方式。第一个重点是生成方面，这有助于探索和发现训练数据的底层结构，并学习生成新图像。这一特性使得GANs在应对数据稀缺和患者隐私方面非常有希望。第二个关注于鉴别方面，其中判别器D可以被视为正常图像的学习先验，以便当呈现异常图像时，它可以被用作正则化器或检测器。图5提供了GAN相关应用的示例，其中示例a、b、c、d、e、f侧重于生成方面，示例g利用区别方面。在下面的小节中，为了帮助读者找到他们感兴趣的应用程序，我们将所有已审阅的文章分类为规范任务：重建、图像合成、分割、分类、检测、配准等。</p>
-<p><img src="https://i.loli.net/2021/10/10/Y4DblKTVL7n2Avs.png" alt="image-20211010211614963"></p>
+<p><img src="https://i.loli.net/2021/10/10/Y4DblKTVL7n2Avs.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/Y4DblKTVL7n2Avs.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010211614963"></p>
 <p>Fig. 5. Example applications using GANs. Figures are directly cropped from the corresponding papers. (a) Left side shows the noise contaminated low dose CT and right side<br>shows the denoised CT that well preserved the low contrast regions in the liver ( Yi and Babyn, 2018 ). (b) Left side shows the MR image and right side shows the synthesized<br>corresponding CT. Bone structures were well delineated in the generated CT image ( Wolterink et al., 2017a ). (c) The generated retinal fundus image have the exact vessel<br>structures as depicted in the left vessel map ( Costa et al., 2017b ). (d) Randomly generated skin lesion from random noise (a mixture of malignant and benign) ( Yi et al.,<br>2018 ). (e) An organ (lung and heart) segmentation example on adult chest X-ray. The shapes of lung and heart are regulated by the adversarial loss ( Dai et al., 2017b ). (f) The<br>third column shows the domain adapted brain lesion segmentation result on SWI sequence without training with the corresponding manual annotation ( Kamnitsas et al.,<br>2017 ). (g) Abnormality detection of optical coherence tomography images of the retina ( Schlegl et al., 2017 ).</p>
 <p>图5。使用GANs的示例应用程序。数字是从相应的文件中直接裁剪出来的。(a)左侧显示噪声污染的低剂量CT，右侧显示去除噪声的CT，它很好地保留了肝脏中的低对比度区域（Yi和Babyn，2018）。(b)左侧显示MR图像，右侧显示相应的合成CT。在Wolterink等人的图像中描绘了骨骼结构。(c)生成的视网膜眼底图像具有左血管图所示的精确血管结构（Costa等人，2017b）。(d)随机噪声随机产生的皮肤损伤（恶性和良性混合）（Yi等人，2018年）。(e)成人胸部X光片上的器官（肺和心脏）分割示例。肺和心脏的形状受对抗性损失的影响（Dai等人，2017b）。(f)第三列显示了SWI序列上的域自适应脑损伤分割结果，无需使用相应的手动注释进行训练（Kamnitsas et al.，2017）。(g)视网膜光学相干断层扫描图像的异常检测（Schlegl等人，2017年）。</p>
 <h3 id="3-1-Reconstruction"><a href="#3-1-Reconstruction" class="headerlink" title="3.1 Reconstruction"></a>3.1 Reconstruction</h3><p>Due to constraints in clinical settings, such as radiation dose and patient comfort, the diagnostic quality of acquired medical images may be limited by noise and artifacts. In the last decade, we have seen a paradigm shift in reconstruction methods changing from analytic to iterative and now to machine learning based methods. These data-driven learning based methods either learn to transfer raw sensory inputs directly to output images or serve as a post processing step for reducing image noise and removing artifacts. Most of the methods reviewed in this section are borrowed directly from the computer vision literature that formulate post-processing as an image-to-image translation problem where the conditioned inputs of cGANs are compromised in certain forms, such as low spatial resolution, noise contamination, under-sampling, or aliasing. One exception is for MR images where the Fourier transform is used to incorporate the raw K-space data into the reconstruction.</p>
@@ -274,228 +2202,1528 @@
 <p>其他类型的损失已用于强调重建中的局部图像结构，例如基于感知相关性重新加权每个像素重要性的显著性损失（Mahapatra，2017）和PET去噪中的样式内容损失（Armanious et al.，2018c）。在运动器官的图像重建中，配对训练样本难以获得。因此，Ravì等人（2018年）提出了一种基于物理采集的损失，以调节内窥镜超分辨率生成的图像结构，Kang等人（2019年）提出在心脏CT去噪中使用CycleGAN和身份损失。 Wolterink等人（2017b）发现，在低剂量CT去噪中，当从pix2pix框架中去除图像域保真度损失时，仍然可以获得有意义的结果，但局部图像结构可以改变。表1总结了与医学图像重建相关的论文。</p>
 <p>It can be noticed that the underlying methods are almost the same for all the reconstruction tasks. MR is special case as it has a well defined forward and backward operation, i.e. Fourier transform, so that raw K-space data can be incorporated. The same methodology can potentially be applied to incorporate the sinogram data in the CT reconstruction process but we have not seen any research using this idea as yet probably because the sinogram data is hard to access. The more data used, either raw K-space or image from other sequence, the better are the reconstructed results. In general, using adversarial loss produces more visually appealing results than using pixel-wise reconstruction loss alone. But using adversarial loss to match the generated and real data distribution may make the model hallucinate unseen structures. Pixel-wise reconstruction loss helps to combat this problem if paired samples are available, and if the model was trained on all healthy images but employed to reconstruct images with pathologies, the hallucination problem will still exist due to domain mismatch. Cohen et al. (2018) have conducted extensive experiments to investigate this problem and suggest that reconstructed images should not be used for direct diagnosis by radiologists unless the model has been properly verified.</p>
 <p>可以注意到，所有重建任务的基本方法几乎相同。MR是一种特殊情况，因为它具有定义良好的正向和反向操作，即傅里叶变换，因此可以合并原始K空间数据。同样的方法可以潜在地应用于将正弦图数据纳入CT重建过程中，但我们尚未看到任何使用此想法的研究，可能是因为正弦图数据难以访问。使用的数据越多，无论是原始K空间还是来自其他序列的图像，重建结果越好。一般来说，使用对抗性损失比单独使用像素级重建损失产生更具视觉吸引力的结果。但是，使用对抗性损失来匹配生成的和真实的数据分布可能会使模型产生看不见的结构的幻觉。如果成对样本可用，像素级重建损失有助于解决此问题，并且如果模型在所有健康图像上训练，但用于重建具有病理学的图像，则由于域不匹配，幻觉问题仍然存在。Cohen等人（2018年）进行了大量实验来研究这一问题，并建议重建图像不应用于放射科医生的直接诊断，除非模型已得到适当验证。</p>
-<p><img src="https://i.loli.net/2021/10/10/dhsHbTnY9r75DZC.png" alt="image-20211010213340155"></p>
+<p><img src="https://i.loli.net/2021/10/10/dhsHbTnY9r75DZC.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/dhsHbTnY9r75DZC.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010213340155"></p>
 <p>However, even though the dataset is carefully curated to match the training and testing distribution, there are other problems in further boosting performance. We have seen various different losses introduced to the pix2pix framework as shown in Table 2 to improve the reconstructed fidelity of local structures. There is, however, no reliable way of comparing their effectiveness except for relying on human observer or downstream image analysis tasks. Large scale statistical analysis by human observer is currently lacking for GAN based reconstruction methods. Furthermore, public datasets used for image reconstruction are not tailored towards further medical image analysis, which leaves a gap between upstream reconstruction and downstream analysis tasks. New reference standard datasets should be created for better comparison of these GAN-based methods.</p>
 <p>然而，尽管数据集经过精心策划以匹配训练和测试分布，但在进一步提高性能方面还存在其他问题。我们已经看到pix2pix框架引入了各种不同的损失，如表2所示，以提高局部结构的重建保真度。然而，除了依靠人类观察者或下游图像分析任务外，没有可靠的方法来比较它们的有效性。目前，基于GAN的重建方法缺乏由人类观察者进行的大规模统计分析。此外，用于图像重建的公共数据集不适合进一步的医学图像分析，这在上游重建和下游分析任务之间留下了差距。应创建新的参考标准数据集，以便更好地比较这些基于GAN的方法。</p>
-<p><img src="https://i.loli.net/2021/10/10/ynAJLSaCK2sD5rm.png" alt="image-20211010214402753"></p>
+<p><img src="https://i.loli.net/2021/10/10/ynAJLSaCK2sD5rm.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/ynAJLSaCK2sD5rm.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010214402753"></p>
 <h3 id="3-2-Medical-image-synthesis"><a href="#3-2-Medical-image-synthesis" class="headerlink" title="3.2 Medical image synthesis"></a>3.2 Medical image synthesis</h3><p>Depending on institutional protocols, patient consent may be required if diagnostic images are intended to be used in a publication or released into the public domain ( Clinical Practice Committee, 20 0 0 ). GANs are widely for medical image synthesis. This helps overcome the privacy issues related to diagnostic medical image data and tackle the insufficient number of positive cases of each pathology. Lack of experts annotating medical images poses another challenge for the adoption of supervised training methods.<br>Although there are ongoing collaborative efforts across multiple healthcare agencies aiming to build large open access datasets, e.g. Biobank, the National Biomedical Imaging Archive (NBIA), The Cancer Imaging Archive (TCIA) and Radiologist Society of North America (RSNA), this issue remains and constrains the number of images researchers might have access to ( Table 3 ).</p>
 <p>根据机构协议，如果诊断图像拟用于出版物或发布到公共领域，则可能需要患者同意（临床实践委员会，20 0）。GANs广泛应用于医学图像合成。这有助于克服与诊断医学图像数据相关的隐私问题，并解决每个病理学的阳性病例数量不足的问题。缺乏对医学图像进行注释的专家对采用监督训练方法提出了另一个挑战。<br>尽管多个医疗机构正在进行合作，以建立大型开放存取数据集，例如Biobank、国家生物医学成像档案馆（NBIA）、癌症成像档案馆（TCIA）和北美放射科医师协会（RSNA），这个问题仍然存在，并限制了研究人员可能获得的图像数量（表3）。</p>
-<p><img src="https://i.loli.net/2021/10/10/NTjGCkZ9hd2zYDI.png" alt="image-20211010214639273"></p>
-<p><img src="https://i.loli.net/2021/10/10/6pTcJFyd58ln7sQ.png" alt="image-20211010214657869"></p>
-<p><img src="https://i.loli.net/2021/10/10/FWp5HNtljGx8Cae.png" alt="image-20211010214715932"></p>
+<p><img src="https://i.loli.net/2021/10/10/NTjGCkZ9hd2zYDI.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/NTjGCkZ9hd2zYDI.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010214639273"></p>
+<p><img src="https://i.loli.net/2021/10/10/6pTcJFyd58ln7sQ.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/6pTcJFyd58ln7sQ.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010214657869"></p>
+<p><img src="https://i.loli.net/2021/10/10/FWp5HNtljGx8Cae.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/FWp5HNtljGx8Cae.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010214715932"></p>
 <p>Traditional ways to augment training sample include scaling, rotation, flipping, translation, and elastic deformation ( Simard et al., 2003 ). However, these transformations do not account for variations resulting from different imaging protocols or sequences, not to mention variations in the size, shape, location and appearance of specific pathology. GANs provide a more generic solution and have been used in numerous works for augmenting training images with promising results.</p>
 <p>增强训练样本的传统方法包括缩放、旋转、翻转、平移和弹性变形（Simard et al.，2003）。然而，这些转换并没有考虑到不同成像协议或序列导致的变化，更不用说特定病理学的大小、形状、位置和外观的变化了。GANs提供了一种更通用的解决方案，并已在许多工程中用于增强训练图像，取得了良好的效果。</p>
 <h4 id="3-2-1-Unconditional-synthesis"><a href="#3-2-1-Unconditional-synthesis" class="headerlink" title="3.2.1 Unconditional synthesis"></a>3.2.1 Unconditional synthesis</h4><p>Unconditional synthesis refers to image generation from random noise without any other conditional information. Techniques commonly adopted in the medical imaging community include DCGAN, WGAN, and PGGAN due to their good training stability.<br>The first two methods can handle an image resolution of up to 256 ×256 but if higher resolution images are desired, the progressive technique proposed in PGGAN is a choice. Realistic images can be generated by directly using the author released code base as long as the variations between images are not too large, for example, lung nodules and liver lesions. To make the generated images useful for downstream tasks, most studies trained a separate generator for each individual class; for example, Frid-Adar et al. (2018) used three DCGANs to generate synthetic samples for three classes of liver lesions (cysts, metastases, and hemangiomas); generated samples were found to be beneficial to the lesion classification task with both improved sensitivity and specificity when combined with real training data.<br>Bermudez et al. (2018) claimed that neuroradiologists found generated MR images to be of comparable quality to real ones, however, there were discrepancies in anatomic accuracy. Papers related to unconditional medical image synthesis are summarized in Table 4 .</p>
 <p>无条件合成是指在没有任何其他条件信息的情况下，从随机噪声中生成图像。医学成像界通常采用的技术包括DCGAN、WGAN和PGGAN，因为它们具有良好的训练稳定性。<br>前两种方法可以处理高达256×256的图像分辨率，但如果需要更高分辨率的图像，则可以选择PGGAN中提出的渐进式技术。只要图像之间的差异不太大，例如肺结节和肝脏病变，就可以直接使用作者发布的代码库生成逼真的图像。为了使生成的图像对下游任务有用，大多数研究为每个单独的类训练了一个单独的生成器；例如，Frid Adar等人（2018年）使用三种DCG生成三类肝脏病变（囊肿、转移瘤和血管瘤）的合成样本；生成的样本被发现有利于病变分类任务，与真实训练数据相结合时，灵敏度和特异性都有所提高。<br>Bermudez等人（2018年）声称，神经放射科医生发现生成的MR图像质量与真实图像相当，但在解剖准确性方面存在差异。表4总结了与无条件医学图像合成相关的论文。</p>
-<p><img src="https://i.loli.net/2021/10/10/vp9rPDXHjbqh67E.png" alt="image-20211010214846137"></p>
+<p><img src="https://i.loli.net/2021/10/10/vp9rPDXHjbqh67E.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/vp9rPDXHjbqh67E.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010214846137"></p>
 <h4 id="3-2-2-Cross-modality-synthesis"><a href="#3-2-2-Cross-modality-synthesis" class="headerlink" title="3.2.2 Cross modality synthesis"></a>3.2.2 Cross modality synthesis</h4><p>Cross modality synthesis (such as generating CT-like images based on MR images) is deemed to be useful for multiple reasons, one of which is to reduce the extra acquisition time and cost.<br>Another reason is to generate new training samples with the appearance being constrained by the anatomical structures delineated in the available modality. Most of the methods reviewed in this section share many similarities to those in Section 3.1 .<br>pix2pix-based frameworks are used in cases where different image modality data can be co-registered to ensure data fidelity.</p>
 <p>跨模态合成（例如基于MR图像生成CT样图像）被认为是有用的，原因有多种，其中之一是减少额外的采集时间和成本。<br>另一个原因是生成新的训练样本，其外观受可用模式中描绘的解剖结构的约束。本节中回顾的大多数方法与第3.1节中的方法有许多相似之处。<br>基于pix2pix的框架用于不同图像模态数据可以共同配准以确保数据保真度的情况。</p>
 <p>CycleGAN-based frameworks are used to handle more general cases where registration is challenging such as in cardiac applications. In a study by Wolterink et al. (2017a) for brain CT image synthesis from MR image, the authors found that training using unpaired images was even better than using aligned images. This most likely resulted from the fact that rigid registration could not very well handle local alignment in the throat, mouth, vertebrae, and nasal cavities. Hiasa et al. (2018) further incorporated gradient consistency loss in the training to improve accuracy at the boundaries. Zhang et al. (2018d) found that using only cycle loss in the cross modality synthesis was insufficient to mitigate geometric distortions in the transformation. Therefore, they employed a shape consistency loss that is obtained from two segmentors (segmentation network). Each segmentor segments the corresponding image modality into semantic labels and provides implicit shape constraints on the anatomy during translation. To make the whole system end-to-end trainable, semantic labels of training images from both modalities are required. Zhang et al. (2018c) and Chen et al. (2018a) proposed using a segmentor also in the cycle transfer using labels in only one modality. Therefore, the segmentor is trained offline and fixed during the training of the image transfer network. As reviewed in Section 2 , UNIT and CycleGAN are two equally valid frameworks for unpaired cross modality synthesis. It was found that these two frameworks performed almost equally well for the transformation between T1 and T2-weighted MR images ( Welander et al., 2018 ). Papers related to cross modality medical image synthesis are summarized in Table 5 .</p>
 <p>基于CycleGAN的框架用于处理配准具有挑战性的更一般情况，例如在心脏应用中。在Wolterink et al.（2017a）关于从MR图像合成大脑CT图像的研究中，作者发现使用未配对图像进行训练甚至比使用对齐图像更好。这很可能是因为刚性配准不能很好地处理咽喉、口腔、脊椎和鼻腔的局部对齐。Hiasa等人（2018年）进一步将梯度一致性损失纳入训练中，以提高边界的准确性。Zhang等人（2018d）发现，在交叉模态合成中仅使用循环损失不足以缓解变换中的几何失真。因此，他们采用了从两个分割器（分割网络）获得的形状一致性损失。每个切割器将相应的图像模态分割成语义标签，并在翻译过程中对解剖结构提供隐式形状约束。为了使整个系统端到端可训练，需要来自两种模式的训练图像的语义标签。Zhang et al.（2018c）和Chen et al.（2018a）建议在循环传输中也使用切割器，仅在一种模式中使用标签。因此，在图像传输网络的训练期间，切割器离线训练并固定。如第2节所述，UNIT和CycleGAN是两个同样有效的非配对跨模态综合框架。研究发现，这两种框架在T1和T2加权MR图像之间的转换中表现几乎相同（Welander et al.，2018）。表5总结了与跨模态医学图像合成相关的论文。</p>
-<p><img src="https://i.loli.net/2021/10/10/Y2NRZuC87qgPwet.png" alt="image-20211010215030343"></p>
-<p><img src="https://i.loli.net/2021/10/10/eZnBviVLNt1WXRO.png" alt="image-20211010215105058"></p>
+<p><img src="https://i.loli.net/2021/10/10/Y2NRZuC87qgPwet.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/Y2NRZuC87qgPwet.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010215030343"></p>
+<p><img src="https://i.loli.net/2021/10/10/eZnBviVLNt1WXRO.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/eZnBviVLNt1WXRO.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010215105058"></p>
 <h4 id="3-2-3-Other-conditional-synthesis"><a href="#3-2-3-Other-conditional-synthesis" class="headerlink" title="3.2.3 Other conditional synthesis"></a>3.2.3 Other conditional synthesis</h4><p>Medical images can be generated by constraints on segmen- tation maps, text, locations or synthetic images etc. This is useful to synthesize images in uncommon conditions, such as lung nodules touching the lung border ( Jin et al., 2018 ). Moreover, the conditioned segmentation maps can also be generated from GANs ( Guibas et al., 2017 ) or from a pretrained segmentation net- work ( Costa et al., 2017a ), by making the generation a two stage process. Mok and Chung (2018) used cGAN to augment training images for brain tumour segmentation. The generator was condi- tioned on a segmentation map and generated brain MR images in a coarse to fine manner. To ensure the tumour was well delineated with a clear boundary in the generated image, they further forced the generator to output the tumour boundaries in the generation process. The full list of synthesis works is summarized in Table 6 .</p>
 <p>医学图像可以通过对分割图、文本、位置或合成图像等的约束生成。这对于在罕见情况下合成图像非常有用，例如肺结节触及肺边界（Jin等人，2018）。此外，通过将生成过程分为两个阶段，也可以从GANs（Guibas等人，2017）或预训练分割网络（Costa等人，2017a）生成条件分割图。Mok和Chung（2018）使用cGAN增强用于脑肿瘤分割的训练图像。该发生器在分割图上进行调节，并以从粗到精的方式生成大脑MR图像。为了确保生成的图像中肿瘤边界清晰，他们进一步强制生成器在生成过程中输出肿瘤边界。表6总结了综合工作的完整清单。</p>
-<p><img src="https://i.loli.net/2021/10/10/vTxdQpm7NagLrE1.png" alt="image-20211010220240451"></p>
+<p><img src="https://i.loli.net/2021/10/10/vTxdQpm7NagLrE1.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/10/vTxdQpm7NagLrE1.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211010220240451"></p>
 <h3 id="3-3-Segmentation"><a href="#3-3-Segmentation" class="headerlink" title="3.3 Segmentation"></a>3.3 Segmentation</h3><p>Generally, researchers have used <strong>pixel-wise or voxel-wise</strong> loss such as cross entropy for segmentation. Despite the fact that U-net ( Ronneberger et al., 2015 ) was used to combine both low-level and high-level features, there is no guarantee of spatial consistency in the final segmentation map. Traditionally, conditional random field (CRF) and graph cut methods are usually adopted for segmentation refinement by incorporating spatial correlation. Their limitation is that they only take into account <strong>pair-wise potentials</strong> which might cause serious boundary leakage in low contrast regions. On the other hand, adversarial losses as introduced by the discriminator can take into account high order potentials ( Yang et al., 2017a ). In this case, the discriminator can be regarded as a shape regulator. This regularization effect is more prominent when the object of interest has a compact shape, e.g. for lung and <em>heart mask(???)</em> but less useful for deformable objects such as vessels and catheters. This regulation effect can be also applied to the internal features of the segmentor to achieve domain (different scanners, imaging protocols, modality) invariance ( Kamnitsas et al., 2017; Dou et al., 2018 ). The adversarial loss can also be viewed as a adaptively learned similarity measure between the segmented outputs and the annotated groundtruth. Therefore, instead of measuring the similarity in the pixel domain, the discriminative network projects the input to a low dimension manifold and measures the similarity there. The idea is similar to the <strong>perceptual loss</strong>. The difference is that the perceptual loss is computed from a pre-trained classification network on natural images whereas the adversarial loss is computed from a network that trained adaptively during the evolvement of the generator.</p>
 <p>通常，研究人员使用<a href="####%E5%83%8F%E7%B4%A0%E7%BA%A7%E6%88%96%E4%BD%93%E7%B4%A0%E9%9B%86">像素级或体素级</a>的损失，如交叉熵进行分割。尽管U-net（Ronneberger et al.，2015）被用于结合低层和高层特征，但无法保证最终分割图的空间一致性。传统上，通常采用条件随机场（CRF）和图切割方法，通过结合空间相关性进行分割细化。它们的局限性在于，它们只考虑了在低对比度区域可能导致严重边界泄漏的<a href="####%E4%BA%8C%E5%85%83%E5%8A%BF%E5%87%BD%E6%95%B0">二元势函数<code>pair-wise potentials</code></a>。另一方面，判别器引入的对抗性损失可以考虑<a href="####%E9%AB%98%E9%98%B6%E5%8A%BF%E5%87%BD%E6%95%B0">高阶势函数<code>high order potentials</code></a>（Yang等人，2017a）。在这种情况下，判别器可被视为形状调节器。当感兴趣的对象具有紧凑的形状时，这种正则化效果更为显著，例如用于肺和*心脏面罩(???)*，但对于可变形对象（如血管和导管）不太有用。该调节效应也可应用于分割器的内部特征，以实现域（不同扫描仪、成像协议、模态）不变性（Kamnitsas等人，2017年；Dou等人，2018年）。对抗性损失也可以被视为分割输出和正确标注数据之间的自适应学习相似性度量。因此，区别网络不是在像素域中测量相似性，而是将输入投影到低维流形并在那里测量相似性。这种想法类似于<a href="####%E6%84%9F%E7%9F%A5%E6%8D%9F%E5%A4%B1">感知损失</a>。不同之处在于，感知损失是通过对自然图像进行预训练的分类网络计算的，而对抗损失是通过在生成器演化过程中进行自适应训练的网络计算的。</p>
 <p>Xue et al. (2018) used a multi-scale $L_1$ loss in the discriminator where features coming from different depths are compared. This was demonstrated to be effective in enforcing the multiscale spatial constraints on segmentation maps and the system achieved state-of-the-art performance in the BRATS 13 and 15 challenges. Zhang et al. (2017c) proposed to use both annotated and unan- notated images in the segmentation pipeline. The annotated images are used in the same way as in Xue et al. (2018) and Son et al. (2017) where both element-wise loss and adversarial loss are applied. The unannotated images on the other hand are only used to compute a segmentation map to confuse the discriminator. Li and Shen (2018) combined pix2pix with ACGAN for segmentation of fluorescent microscopy images of different cell types. They found that the introduction of the auxiliary classifier branch provides regulation to both the discriminator and the segmentor.</p>
 <p>Xue et al.（2018）在判别器中使用多尺度$L_1$损失，比较来自不同深度的特征。这被证明是有效的，在分割地图上实施多尺度空间约束，系统在BRAT 13和15挑战中实现了最先进的性能。Zhang等人（2017c）建议在分割管道中同时使用注释图像和非注释图像。注释图像的使用方式与Xue et al.（2018）和Son et al.（2017）中相同，其中元素损失和对抗损失均适用。另一方面，未标注的图像仅用于计算分割图以混淆判别器。Li和Shen（2018）将pix2pix与ACGAN相结合，对不同细胞类型的荧光显微镜图像进行分割。他们发现，辅助分类器分支的引入为判别器和分割器提供了调节。</p>
 <p>Unlike these aforementioned segmentation works where adversarial training is used to ensure higher order structure consistency on the final segmentation maps, the adversarial training scheme in Zhu et al. (2018) enforces network invariance to small perturbations of the training samples in order to reduce overfitting on small dataset. Papers related to medical image segmentation are summarized in Table 8 .</p>
 <p>与上述使用对抗性训练确保最终分割图上的高阶结构一致性的分割工作不同，Zhu等人（2018）的对抗性训练方案对训练样本的小扰动实施网络不变性，以减少小数据集上的过度拟合。表8总结了与医学图像分割相关的论文。</p>
-<p><img src="https://i.loli.net/2021/10/11/wUQx8pWIi1dlaGM.png" alt="image-20211011184615605"></p>
+<p><img src="https://i.loli.net/2021/10/11/wUQx8pWIi1dlaGM.png" class="lazyload" data-srcset="https://i.loli.net/2021/10/11/wUQx8pWIi1dlaGM.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20211011184615605"></p>
 <h3 id="3-4-Classification"><a href="#3-4-Classification" class="headerlink" title="3.4 Classification"></a>3.4 Classification</h3><p>Classification is arguably one of the most successful tasks where deep learning has been applied. Hierarchical image features can be extracted from a deep neural network discriminatively trained with image-wise class labels. GANs have been used for classification problems as well, either using part of the generator and discriminator as a feature extractor or directly using the discriminator as a classifier (by adding an extra class corresponding to the generated images). Hu et al. (2018) used combined WGAN and InfoGAN for unsupervised cell-level feature representation learning in histopathology images whereas Yi et al. (2018) combined WGAN and CatGAN for unsupervised and semi-supervised feature representation learning for dermoscopy images. Both works extract features from the discriminator and build a classifier on top. Madani et al. (2018b) , Lahiri et al. (2017) and Lecouat et al. (2018) adopted the semi- supervised training scheme of GAN for chest abnormality classification, patch-based retinal vessel classification and cardiac disease diagnosis respectively. They found that the semi-supervised GAN can achieve performance comparable with a traditional supervised CNN with an order of magnitude less labeled data. Furthermore, Madani et al. (2018b) have also shown that the adversarial loss can reduce domain overfitting by simply supplying unlabeled test domain images to the discriminator in identifying cardiac abnormalities in chest X-ray. A similar work in addressing domain variance in whole slide images (WSI) has been conducted by Ren et al. (2018) .</p>
 <p>分类可以说是应用深度学习的最成功的任务之一。分层图像特征可以从深度神经网络中提取，深度神经网络通过图像分类标签进行区分训练。GANs也用于分类问题，或者使用生成器和判别器的一部分作为特征提取器，或者直接使用判别器作为分类器（通过添加与生成的图像相对应的额外类）。Hu et al.（2018）将WGAN和InfoGAN组合用于组织病理学图像的无监督细胞级特征表示学习，而Yi et al.（2018）将WGAN和CatGAN组合用于皮肤镜图像的无监督和半监督特征表示学习。这两项工作都从判别器中提取特征，并在顶部构建分类器。Madani et al.（2018b）、Lahiri et al.（2017）和Lecouat et al.（2018）分别采用GAN的半监督训练方案进行胸部异常分类、基于斑片的视网膜血管分类和心脏病诊断。他们发现，半监督GAN可以实现与传统监督CNN相当的性能，标记数据数量级更少。此外，Madani等人（2018b）还表明，对抗性丢失可以通过简单地向判别器提供未标记的测试域图像来减少域过度拟合，从而识别胸部X射线中的心脏异常。Ren等人（2018年）在解决整张幻灯片图像中的域差异（WSI）方面进行了类似的工作。</p>
 <p>Most of the other works that used GANs to generate new training samples have been already mentioned in Section 3.2.1 . These studies applied a two stage process, with the first stage learned to augment the images and the second stage learned to perform classification by adopting the traditional classification network. The two stages are trained disjointedly without any communication in between. The advantage is that these two components can be replaced easily if more advanced unconditional synthesis architectures are proposed whereas the downside is that the generation has to be conducted for each class separately (N models for N classes), which is not memory and computation efficient. A single model that is capable of performing conditional synthesis of mul- tiple categories is an active research direction ( Brock et al., 2018 ). Surprisingly, Frid-Adar et al. (2018) found that using separate GAN (DCGAN) for each lesion class resulted in better performance in lesion classification than using a unified GAN (ACGAN) for all classes. The underlying reason remains to be explored. Furthermore, Finlayson et al. (2018) argue that images generated from GANs may serve as an effective augmentation in the medium-data regime, but may not be helpful in a high or low-data regime.</p>
 <p>第3.2.1节已经提到了使用GANs生成新训练样本的大多数其他工作。这些研究采用了两个阶段的过程，第一阶段学习增强图像，第二阶段学习采用传统分类网络进行分类。这两个阶段是分开训练的，中间没有任何交流。优点是，如果提出更高级的无条件合成体系结构，这两个组件可以很容易地被替换，而缺点是必须对每个类分别进行生成（N个类的N个模型），这不利于内存和计算效率。能够对多个类别进行条件合成的单一模型是一个积极的研究方向（Brock等人，2018年）。令人惊讶的是，Frid Adar等人（2018年）发现，对每个病变类别使用单独的GAN（DCGAN）比对所有类别使用统一的GAN（ACGAN）在病变分类方面表现更好。根本原因仍有待探讨。此外，Finlayson等人（2018年）认为，从GANs生成的图像可以作为中等数据区域的有效增强，但在高或低数据区域可能没有帮助。</p>
 <h3 id="3-5-Detection"><a href="#3-5-Detection" class="headerlink" title="3.5 Detection"></a>3.5 Detection</h3><p>The discriminator of GANs can be utilized to detect abnormalities such as lesions by learning the probability distribution of training images depicting normal pathology. Any image that falls out of this distribution can be deemed as abnormal. Schlegl et al. (2017) used the exact idea to learn a manifold of normal anatomical variability and proposed a novel anomaly scoring scheme based on the fitness of the test image’s latent code to the learned manifold. The learning process was conducted in an unsupervised fashion and effectiveness was demonstrated by state- of-the-art performance of anomaly detection on optical coherence tomography (OCT) images. Alex et al. (2017) used GAN for brain lesion detection on MR images. The generator was used to model the distribution of normal patches and the trained discriminator was used to compute a posterior probability of patches centered on every pixel in the test image. Chen and Konukoglu (2018) used an adversarial auto-encoder to learn the data distribution of healthy brain MR images. The lesion image was then mapped to an image without a lesion by exploring the learned latent space, and the lesion could be highlighted by computing the residual of these two images. We can see that all the detection studies targeted for abnormalities that are hard to enumerate.</p>
 <p>通过学习描述正常病理学的训练图像的概率分布，GANs鉴别器可用于检测异常，如病变。任何不符合此分布的图像都可以被视为异常。Schlegl等人（2017年）利用准确的想法学习了一个正常解剖变异的流形，并基于测试图像的潜在代码与学习的流形的适合度，提出了一种新的异常评分方案。学习过程以无监督的方式进行，光学相干断层扫描（OCT）图像异常检测的最新性能证明了学习过程的有效性。Alex等人（2017年）使用GAN在MR图像上检测脑损伤。该生成器用于模拟正态面片的分布，训练的鉴别器用于计算以测试图像中每个像素为中心的面片的后验概率。Chen和Konukoglu（2018）使用对抗式自动编码器学习健康大脑MR图像的数据分布。然后，通过探索学习到的潜在空间，将病变图像映射到没有病变的图像，并通过计算这两个图像的残差来突出病变。我们可以看到，所有的检测研究都针对难以列举的异常。</p>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h4 id="最大对数似然目标"><a href="#最大对数似然目标" class="headerlink" title="最大对数似然目标"></a>最大对数似然目标</h4><h4 id="鞍点优化"><a href="#鞍点优化" class="headerlink" title="鞍点优化"></a>鞍点优化</h4><h4 id="JS散度"><a href="#JS散度" class="headerlink" title="JS散度"></a>JS散度</h4><h4 id="模式崩溃"><a href="#模式崩溃" class="headerlink" title="模式崩溃"></a>模式崩溃</h4><h4 id="f散度"><a href="#f散度" class="headerlink" title="f散度"></a>f散度</h4><h4 id="铰链损失"><a href="#铰链损失" class="headerlink" title="铰链损失"></a>铰链损失</h4><h4 id="Wasserstein距离"><a href="#Wasserstein距离" class="headerlink" title="Wasserstein距离"></a>Wasserstein距离</h4><h4 id="自动编码器架构"><a href="#自动编码器架构" class="headerlink" title="自动编码器架构"></a>自动编码器架构</h4><h4 id="完全卷积采样"><a href="#完全卷积采样" class="headerlink" title="完全卷积采样"></a>完全卷积采样</h4><h4 id="分割掩模"><a href="#分割掩模" class="headerlink" title="分割掩模"></a>分割掩模</h4><h4 id="像素级或体素级"><a href="#像素级或体素级" class="headerlink" title="像素级或体素级"></a>像素级或体素级</h4><h4 id="二元势函数"><a href="#二元势函数" class="headerlink" title="二元势函数"></a>二元势函数</h4><h4 id="高阶势函数"><a href="#高阶势函数" class="headerlink" title="高阶势函数"></a>高阶势函数</h4><h4 id="感知损失"><a href="#感知损失" class="headerlink" title="感知损失"></a>感知损失</h4>
+</div><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><div class="story post-story"><h4 id="最大对数似然目标"><a href="#最大对数似然目标" class="headerlink" title="最大对数似然目标"></a>最大对数似然目标</h4><h4 id="鞍点优化"><a href="#鞍点优化" class="headerlink" title="鞍点优化"></a>鞍点优化</h4><h4 id="JS散度"><a href="#JS散度" class="headerlink" title="JS散度"></a>JS散度</h4><h4 id="模式崩溃"><a href="#模式崩溃" class="headerlink" title="模式崩溃"></a>模式崩溃</h4><h4 id="f散度"><a href="#f散度" class="headerlink" title="f散度"></a>f散度</h4><h4 id="铰链损失"><a href="#铰链损失" class="headerlink" title="铰链损失"></a>铰链损失</h4><h4 id="Wasserstein距离"><a href="#Wasserstein距离" class="headerlink" title="Wasserstein距离"></a>Wasserstein距离</h4><h4 id="自动编码器架构"><a href="#自动编码器架构" class="headerlink" title="自动编码器架构"></a>自动编码器架构</h4><h4 id="完全卷积采样"><a href="#完全卷积采样" class="headerlink" title="完全卷积采样"></a>完全卷积采样</h4><h4 id="分割掩模"><a href="#分割掩模" class="headerlink" title="分割掩模"></a>分割掩模</h4><h4 id="像素级或体素级"><a href="#像素级或体素级" class="headerlink" title="像素级或体素级"></a>像素级或体素级</h4><h4 id="二元势函数"><a href="#二元势函数" class="headerlink" title="二元势函数"></a>二元势函数</h4><h4 id="高阶势函数"><a href="#高阶势函数" class="headerlink" title="高阶势函数"></a>高阶势函数</h4><h4 id="感知损失"><a href="#感知损失" class="headerlink" title="感知损失"></a>感知损失</h4>
+</div>
+  </div>
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/>http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
     </div>
+  
+  
+    
 
-    
-    
-    
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/GAN-%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C-Medical-imaging-%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F/" rel="tag"># GAN, 生成对抗网络, Medical imaging, 医学图像</a>
-          </div>
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2021-10-11T23:45:28+08:00">
+  <a class='notlink' href="/" onclick="return false;" title="Click me!" >
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年10月11日</p>
+  </a>
+</div>
 
         
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/GAN-%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C-Medical-imaging-%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>GAN, 生成对抗网络, Medical imaging, 医学图像</p></a></div>
+  <span hidden itemprop="keywords">GAN, 生成对抗网络, Medical imaging, 医学图像</span>
 
 
         
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" rel="prev" title="机器学习相关名词解释">
-      <i class="fa fa-chevron-left"></i> 机器学习相关名词解释
-    </a></div>
-      <div class="post-nav-item"></div>
-    </div>
-      </footer>
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/&title=Generative adversarial network in medical imaging A review - Lethe&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/&title=Generative adversarial network in medical imaging A review - Lethe&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/&title=Generative adversarial network in medical imaging A review - Lethe&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/'>
+          <p class='title'>机器学习相关名词解释<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>名词解释机器学习Machine Learning：机器学习致力于研究如何通过计算的手段，利用经验来改善自身性能。也即在计算机上从数据中产生“模型”model的算法，即学习算法learning a...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+  
+  <article class="post white-box reveal shadow" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/index.html#comments">
+    </span>
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    
+    <div id="layoutHelper-comments"></div>
+
   </article>
   
+
+
+
+
+
+</div>
+<aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
   
   
+    
+    
 
 
 
-          </div>
+  <section class="widget toc-wrapper shadow desktop mobile pjax" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-text">1. Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Background"><span class="toc-text">2. Background</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Vanilla-GAN"><span class="toc-text">2.1 Vanilla GAN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Challenges-in-optimizing-GANs"><span class="toc-text">2.2 Challenges in optimizing GANs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Variants-of-GANs"><span class="toc-text">2.3 Variants of GANs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-Varying-objective-of-D"><span class="toc-text">2.3.1 Varying objective of D</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-Varying-object-of-G"><span class="toc-text">2.3.2 Varying object of G</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-Varying-architecture"><span class="toc-text">2.3.3 Varying architecture</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Applications-in-medical-imaging"><span class="toc-text">3. Applications in medical imaging</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Reconstruction"><span class="toc-text">3.1 Reconstruction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Medical-image-synthesis"><span class="toc-text">3.2 Medical image synthesis</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-Unconditional-synthesis"><span class="toc-text">3.2.1 Unconditional synthesis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-Cross-modality-synthesis"><span class="toc-text">3.2.2 Cross modality synthesis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-Other-conditional-synthesis"><span class="toc-text">3.2.3 Other conditional synthesis</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-Segmentation"><span class="toc-text">3.3 Segmentation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-Classification"><span class="toc-text">3.4 Classification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-Detection"><span class="toc-text">3.5 Detection</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%AF%B9%E6%95%B0%E4%BC%BC%E7%84%B6%E7%9B%AE%E6%A0%87"><span class="toc-text">最大对数似然目标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9E%8D%E7%82%B9%E4%BC%98%E5%8C%96"><span class="toc-text">鞍点优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS%E6%95%A3%E5%BA%A6"><span class="toc-text">JS散度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%B4%A9%E6%BA%83"><span class="toc-text">模式崩溃</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#f%E6%95%A3%E5%BA%A6"><span class="toc-text">f散度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%B0%E9%93%BE%E6%8D%9F%E5%A4%B1"><span class="toc-text">铰链损失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Wasserstein%E8%B7%9D%E7%A6%BB"><span class="toc-text">Wasserstein距离</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E7%BC%96%E7%A0%81%E5%99%A8%E6%9E%B6%E6%9E%84"><span class="toc-text">自动编码器架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E5%8D%B7%E7%A7%AF%E9%87%87%E6%A0%B7"><span class="toc-text">完全卷积采样</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%89%B2%E6%8E%A9%E6%A8%A1"><span class="toc-text">分割掩模</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%83%8F%E7%B4%A0%E7%BA%A7%E6%88%96%E4%BD%93%E7%B4%A0%E7%BA%A7"><span class="toc-text">像素级或体素级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%85%83%E5%8A%BF%E5%87%BD%E6%95%B0"><span class="toc-text">二元势函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%8A%BF%E5%87%BD%E6%95%B0"><span class="toc-text">高阶势函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%84%9F%E7%9F%A5%E6%8D%9F%E5%A4%B1"><span class="toc-text">感知损失</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+  
+
+
+<!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+
+  <!-- Custom Files side begin -->
+  
+  <!-- Custom Files side end -->
+</aside>
+
+
+
+          <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<pjax>
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.postTitle="Generative adversarial network in medical imaging A review";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  //  see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs
+  
+    // header
+    var l_header=document.getElementById("l_header");
+    
+    l_header.classList.add("show");
+    
+    
+      // cover
+      var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
+      var scroll_down=document.getElementById('scroll-down');
+      cover_wrapper.id="none";
+      cover_wrapper.style.display="none";
+      scroll_down.style.display="none";
+    
+  
+</script>
+</pjax>
+        </div>
+        
+  
+  <footer class="footer clearfix"  itemscope itemtype="http://schema.org/WPFooter">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
           
 
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper" itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          
+            
+          
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/5.0.0.alpha.3" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+
+        </div>
+      
+    
+    <!-- Custom Files footer begin-->
+    
+    <!-- Custom Files footer end-->
+  </footer>
+
+
+        <a id="s-top" class="fas fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+  /************这个文件存放不需要重载的全局变量和全局函数*********/
+  window.volantis = {}; // volantis 全局变量
+  volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
+  /******************** volantis.EventListener ********************************/
+  // 事件监听器 see: /source/js/app.js
+  volantis.EventListener = {}
+  // 这里存放pjax切换页面时将被移除的事件监听器
+  volantis.EventListener.list = []
+  //构造方法
+  function volantisEventListener(type, f, ele) {
+    this.type = type
+    this.f = f
+    this.ele = ele
+  }
+  // 移除事件监听器
+  volantis.EventListener.remove = () => {
+    volantis.EventListener.list.forEach(function (i) {
+      i.ele.removeEventListener(i.type, i.f, false)
+    })
+    volantis.EventListener.list = []
+  }
+  /******************** volantis.dom.$ ********************************/
+  // 注：这里没有选择器，也没有forEach一次只处理一个dom，这里重新封装主题常用的dom方法，返回的是dom对象，对象包含了以下方法，同时保留dom的原生API
+  function volantisDom(ele) {
+    if (!ele) ele = document.createElement("div")
+    this.ele = ele;
+    // ==============================================================
+    this.ele.find = (c) => {
+      let q = this.ele.querySelector(c)
+      if (q)
+        return new volantisDom(q)
     }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
+    // ==============================================================
+    this.ele.hasClass = (c) => {
+      return this.ele.className.match(new RegExp('(\\s|^)' + c + '(\\s|$)'));
+    }
+    this.ele.addClass = (c) => {
+      this.ele.classList.add(c);
+      return this.ele
+    }
+    this.ele.removeClass = (c) => {
+      this.ele.classList.remove(c);
+      return this.ele
+    }
+    this.ele.toggleClass = (c) => {
+      if (this.ele.hasClass(c)) {
+        this.ele.removeClass(c)
+      } else {
+        this.ele.addClass(c)
+      }
+      return this.ele
+    }
+    // ==============================================================
+    // 参数 r 为 true 表示pjax切换页面时事件监听器将被移除，false不移除
+    this.ele.on = (c, f, r = 1) => {
+      this.ele.addEventListener(c, f, false)
+      if (r) {
+        volantis.EventListener.list.push(new volantisEventListener(c, f, this.ele))
+      }
+      return this.ele
+    }
+    this.ele.click = (f, r) => {
+      this.ele.on("click", f, r)
+      return this.ele
+    }
+    this.ele.scroll = (f, r) => {
+      this.ele.on("scroll", f, r)
+      return this.ele
+    }
+    // ==============================================================
+    this.ele.html = (c) => {
+      // if(c=== undefined){
+      //   return this.ele.innerHTML
+      // }else{
+      this.ele.innerHTML = c
+      return this.ele
+      // }
+    }
+    // ==============================================================
+    this.ele.hide = (c) => {
+      this.ele.style.display = "none"
+      return this.ele
+    }
+    this.ele.show = (c) => {
+      this.ele.style.display = "block"
+      return this.ele
+    }
+    // ==============================================================
+    return this.ele
+  }
+  volantis.dom.$ = (ele) => {
+    return !!ele ? new volantisDom(ele) : null;
+  }
+  /******************** volantis.dom ********************************/
+  // 页面选择器 将dom对象缓存起来 see: /source/js/app.js etc.
+  volantis.dom.bodyAnchor = volantis.dom.$(document.getElementById("safearea")); // 页面主体
+  volantis.dom.topBtn = volantis.dom.$(document.getElementById('s-top')); // 向上
+  volantis.dom.wrapper = volantis.dom.$(document.getElementById('wrapper')); // 整个导航栏
+  volantis.dom.coverAnchor = volantis.dom.$(document.querySelector('#l_cover .cover-wrapper')); // 1个
+  volantis.dom.switcher = volantis.dom.$(document.querySelector('#l_header .switcher .s-search')); // 搜索按钮   移动端 1个
+  volantis.dom.header = volantis.dom.$(document.getElementById('l_header')); // 移动端导航栏
+  volantis.dom.search = volantis.dom.$(document.querySelector('#l_header .m_search')); // 搜索框 桌面端 移动端 1个
+  volantis.dom.mPhoneList = volantis.dom.$(document.querySelectorAll('#l_header .m-phone .list-v')); //  手机端 子菜单 多个
+  /******************** RunItem ********************************/
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = ()=>{
+          volantis.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) =>{
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index,1);
+        }
       }
     }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+  /******************** Pjax ********************************/
+  // /layout/_plugins/pjax/index.ejs
+  // volantis.pjax.send(callBack[,"callBackName"]) 传入pjax:send回调函数
+  // volantis.pjax.push(callBack[,"callBackName"]) 传入pjax:complete回调函数
+  // volantis.pjax.error(callBack[,"callBackName"]) 传入pjax:error回调函数
+  volantis.pjax = {};
+  volantis.pjax.method = {
+    complete: new RunItem(),
+    error: new RunItem(),
+    send: new RunItem(),
+  };
+  volantis.pjax = {
+    ...volantis.pjax,
+    push: volantis.pjax.method.complete.push,
+    error: volantis.pjax.method.error.push,
+    send: volantis.pjax.method.send.push,
+  };
+  /********************  Dark Mode  ********************************/
+  // /layout/_partial/scripts/darkmode.ejs
+  // volantis.dark.mode 当前模式 dark or light
+  // volantis.dark.toggle() 暗黑模式触发器
+  // volantis.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  volantis.dark = {};
+  volantis.dark.method = {
+    toggle: new RunItem(),
+  };
+  volantis.dark = {
+    ...volantis.dark,
+    push: volantis.dark.method.toggle.push,
+  };
+  /********************  Message  ********************************/
+  // /layout/_plugins/message/script.ejs
+  // volantis.message
+  /********************  isMobile  ********************************/
+  // /source/js/app.js
+  // volantis.isMobile
+  // volantis.isMobileOld
+  /********************脚本动态加载函数********************************/
+  // volantis.js(src, cb)  cb 可以传入onload回调函数 或者 JSON对象 例如: volantis.js("src", ()=>{}) 或 volantis.js("src", {defer:true,onload:()=>{}})
+  // volantis.css(src)
+
+  // 返回Promise对象，如下方法同步加载资源，这利于处理文件资源之间的依赖关系，例如：APlayer 需要在 MetingJS 之前加载
+  // (async () => {
+  //     await volantis.js("...theme.plugins.aplayer.js.aplayer...")
+  //     await volantis.js("...theme.plugins.aplayer.js.meting...")
+  // })();
+
+  // 已经加入了setTimeout
+  volantis.js = (src, cb) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
     });
+  }
+  volantis.css = (src) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  }
+  /********************按需加载的插件********************************/
+  // volantis.import.jQuery().then(()=>{})
+  volantis.import = {
+    jQuery: () => {
+      if (typeof jQuery == "undefined") {
+        return volantis.js("https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js")
+      } else {
+        return new Promise(resolve => {
+          resolve()
+        });
+      }
+    }
+  }
+  /********************** requestAnimationFrame ********************************/
+  // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+  // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+  volantis.requestAnimationFrame = (fn)=>{
+    if (!window.requestAnimationFrame) {
+      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+    }
+    window.requestAnimationFrame(fn)
+  }
+  /************************ layoutHelper *****************************************/
+  volantis.layoutHelper = (helper, html, opt)=>{
+    opt = Object.assign({clean:false, pjax:true}, opt)
+    function myhelper(helper, html, clean) {
+      volantis.tempDiv = document.createElement("div");
+      volantis.tempDiv.innerHTML = html;
+      let layoutHelper = document.querySelector("#layoutHelper-"+helper)
+      if (layoutHelper) {
+        if (clean) {
+          layoutHelper.innerHTML = ""
+        }
+        layoutHelper.append(volantis.tempDiv);
+      }
+    }
+    myhelper(helper, html, opt.clean)
+    if (opt.pjax) {
+      volantis.pjax.push(()=>{
+        myhelper(helper, html, opt.clean)
+      },"layoutHelper-"+helper)
+    }
+  }
+  /****************************** 滚动事件处理 ****************************************/
+  volantis.scroll = {
+    engine: new RunItem(),
+    unengine: new RunItem(),
+  };
+  volantis.scroll = {
+    ...volantis.scroll,
+    push: volantis.scroll.engine.push,
+  };
+  // 滚动条距离顶部的距离
+  volantis.scroll.getScrollTop = () =>{
+    let scrollPos;
+    if (window.pageYOffset) {
+      scrollPos = window.pageYOffset;
+    } else if (document.compatMode && document.compatMode != 'BackCompat') {
+      scrollPos = document.documentElement.scrollTop;
+    } else if (document.body) {
+      scrollPos = document.body.scrollTop;
+    }
+    return scrollPos;
+  }
+  // 使用 requestAnimationFrame 处理滚动事件
+  // `volantis.scroll.del` 中存储了一个数值, 该数值检测一定时间间隔内滚动条滚动的位移, 数值的检测频率是浏览器的刷新频率. 数值为正数时, 表示向下滚动. 数值为负数时, 表示向上滚动.
+  volantis.scroll.handleScrollEvents = () => {
+    volantis.scroll.lastScrollTop = volantis.scroll.getScrollTop()
+    function loop() {
+      const scrollTop = volantis.scroll.getScrollTop();
+      if (volantis.scroll.lastScrollTop !== scrollTop) {
+        volantis.scroll.del = scrollTop - volantis.scroll.lastScrollTop;
+        volantis.scroll.lastScrollTop = scrollTop;
+        // if (volantis.scroll.del > 0) {
+        //   console.log("向下滚动");
+        // } else {
+        //   console.log("向上滚动");
+        // }
+        volantis.scroll.engine.start();
+      }else{
+        volantis.scroll.unengine.start();
+      }
+      volantis.requestAnimationFrame(loop)
+    }
+    volantis.requestAnimationFrame(loop)
+  }
+  volantis.scroll.handleScrollEvents()
+  // 触发页面滚动至目标元素位置
+  volantis.scroll.to = (ele, option = {}) =>{
+    // 默认配置
+    opt = {
+      top: ele.getBoundingClientRect().top + document.documentElement.scrollTop,
+      behavior: "smooth"
+    }
+    // 定义配置
+    if ("top" in option) {
+      opt.top = option.top
+    }
+    if ("behavior" in option) {
+      opt.behavior = option.behavior
+    }
+    if ("addTop" in option) {
+      opt.top += option.addTop
+    }
+    if (!("observerDic" in option)) {
+      option.observerDic = 25
+    }
+    // 滚动
+    window.scrollTo(opt);
+    // 监视器
+    // 监视并矫正元素滚动到指定位置 
+    // 目前用于处理 toc 部分 lazyload 引起的 cls 导致的定位失败问题
+    if (option.observer) {
+      volantis.scroll.unengine.push(()=>{
+        let me = ele.getBoundingClientRect().top
+        if(!(me >= -option.observerDic && me <= option.observerDic)){
+          volantis.scroll.to(ele, option)
+        }else{
+          volantis.scroll.unengine.remove("unengineObserver")
+        }
+      },"unengineObserver")
+    }
+  }
+  /******************************************************************************/
+  /******************************************************************************/
+</script>
+<script>
+  
+  volantis.css("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css");
+  
+  
+  
+</script>
+
+<!-- required -->
+
+
+<!-- internal -->
+
+
+  <script>
+  volantis.message = (title, message, option = {}, done = null) => {
+    if (typeof iziToast === "undefined") {
+      volantis.css('/css/message.css?time=1634014532470')
+      volantis.js('/js/message.js?time=1634014532470', () => {
+        tozashMessage(title, message, option, done);
+      });
+    } else {
+      tozashMessage(title, message, option, done);
+    }
+
+    function tozashMessage(title, message, option, done) {
+      const {
+        icon,
+        time,
+        position,
+        transitionIn,
+        transitionOut,
+        messageColor,
+        titleColor,
+        backgroundColor,
+        zindex,
+        displayMode
+      } = option;
+      iziToast.show({
+        layout: '2',
+        icon: 'Fontawesome',
+        closeOnEscape: 'true',
+        displayMode: displayMode || 'replace',
+        transitionIn: transitionIn || 'bounceInLeft',
+        transitionOut: transitionOut || 'fadeOutRight',
+        messageColor: messageColor || 'var(--color-text)',
+        titleColor: titleColor || 'var(--color-text)',
+        backgroundColor: backgroundColor || 'var(--color-card)',
+        zindex: zindex || '2147483647',
+        icon: icon || 'fas fa-info-circle light-blue',
+        timeout: time || '5000',
+        position: position || 'topRight',
+        title: title,
+        message: message,
+        onClosed: () => {
+          if(done) done();
+        },
+      });
+    }
+  };
+
+  volantis.question = (title, message, option = {}, success = null, cancel = null, done = null) => {
+    if (typeof iziToast === "undefined") {
+      volantis.css('/css/message.css?time=1634014532470')
+      volantis.js('/js/message.js?time=1634014532470', () => {
+        tozashQuestion(title, message, option, success, cancel, done);
+      });
+    } else {
+      tozashQuestion(title, message, option, success, cancel, done);
+    }
+
+    function tozashQuestion(title, message, option, success, cancel, done) {
+      const {
+        icon,
+        time,
+        position,
+        transitionIn,
+        transitionOut,
+        messageColor,
+        titleColor,
+        backgroundColor,
+        zindex
+      } = option;
+      iziToast.question({ 
+        id: 'question',
+        icon: 'Fontawesome',
+        close: false,
+        overlay: true,
+        displayMode: 'once',
+        position: 'center',
+        messageColor: messageColor || 'var(--color-text)',
+        titleColor: titleColor || 'var(--color-text)',
+        backgroundColor: backgroundColor || 'var(--color-card)',
+        zindex: zindex || '2147483647',
+        icon: icon || 'fas fa-question-circle light-blue',
+        timeout: time || '20000',
+        title: title,
+        message: message,
+        buttons: [
+          ['<button><b>是</b></button>', (instance, toast) => {
+            instance.hide({ transitionOut: transitionOut || 'fadeOut' }, toast, 'button');
+            if(success) success(instance, toast)
+          }],
+          ['<button><b>否</b></button>', (instance, toast) => {
+            instance.hide({ transitionOut: transitionOut || 'fadeOut' }, toast, 'button');
+            if(cancel) cancel(instance, toast)
+          }]
+        ],
+        onClosed: (instance, toast, closedBy) => {
+          if(done) done(instance, toast, closedBy);
+        }
+      });
+    }
+  }
+
+  volantis.hideMessage = (done = null) => {
+    const toast = document.querySelector('.iziToast');
+    if (!toast) {
+      if(done) done()
+      return;
+    }
+    
+    if (typeof iziToast === "undefined") {
+      volantis.css('/css/message.css?time=1634014532470')
+      volantis.js('/js/message.js?time=1634014532470', () => {
+        hideMessage(done);
+      });
+    } else {
+      hideMessage(done);
+    }
+
+    function hideMessage(done) {
+      iziToast.hide({}, toast);
+      if(done) done();
+    }
+  }
+
+  volantis.messageCopyright = {
+    enable: 'true' === 'true' ? true : false,
+    title: '知识共享许可协议',
+    message: '请遵守 CC BY-NC-SA 4.0 协议。',
+    icon: 'far fa-copyright light-blue'
+  }
+
+  volantis.messageRightMenu = {
+    enable: 'true' === 'true' ? true : false,
+  }
+
+  if(volantis.messageCopyright.enable) {
+    document.body.oncopy = function(){
+      volantis.message(volantis.messageCopyright.title, volantis.messageCopyright.message, {
+        icon: volantis.messageCopyright.icon
+      });
+    }; 
   }
 </script>
 
-        </div>
+
+
+
+  
+  
+  
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='navigation menuNavigation-Content'>
+        <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+      </li>
+      <li class='option menuOption-Content'>
+        <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='copyText'>
           
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Generative-adversarial-network-in-medical-imaging-A-review"><span class="nav-number">1.</span> <span class="nav-text">Generative adversarial network in medical imaging: A review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Background"><span class="nav-number">1.3.</span> <span class="nav-text">2. Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Vanilla-GAN"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 Vanilla GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Challenges-in-optimizing-GANs"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 Challenges in optimizing GANs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Variants-of-GANs"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.3 Variants of GANs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-Varying-objective-of-D"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">2.3.1 Varying objective of D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-Varying-object-of-G"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">2.3.2 Varying object of G</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-Varying-architecture"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">2.3.3 Varying architecture</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Applications-in-medical-imaging"><span class="nav-number">1.4.</span> <span class="nav-text">3. Applications in medical imaging</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Reconstruction"><span class="nav-number">1.4.1.</span> <span class="nav-text">3.1 Reconstruction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Medical-image-synthesis"><span class="nav-number">1.4.2.</span> <span class="nav-text">3.2 Medical image synthesis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-Unconditional-synthesis"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">3.2.1 Unconditional synthesis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-Cross-modality-synthesis"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">3.2.2 Cross modality synthesis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-Other-conditional-synthesis"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">3.2.3 Other conditional synthesis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Segmentation"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.3 Segmentation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Classification"><span class="nav-number">1.4.4.</span> <span class="nav-text">3.4 Classification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-Detection"><span class="nav-number">1.4.5.</span> <span class="nav-text">3.5 Detection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">1.5.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%AF%B9%E6%95%B0%E4%BC%BC%E7%84%B6%E7%9B%AE%E6%A0%87"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">最大对数似然目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9E%8D%E7%82%B9%E4%BC%98%E5%8C%96"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">鞍点优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS%E6%95%A3%E5%BA%A6"><span class="nav-number">1.5.0.3.</span> <span class="nav-text">JS散度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%B4%A9%E6%BA%83"><span class="nav-number">1.5.0.4.</span> <span class="nav-text">模式崩溃</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#f%E6%95%A3%E5%BA%A6"><span class="nav-number">1.5.0.5.</span> <span class="nav-text">f散度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%B0%E9%93%BE%E6%8D%9F%E5%A4%B1"><span class="nav-number">1.5.0.6.</span> <span class="nav-text">铰链损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Wasserstein%E8%B7%9D%E7%A6%BB"><span class="nav-number">1.5.0.7.</span> <span class="nav-text">Wasserstein距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E7%BC%96%E7%A0%81%E5%99%A8%E6%9E%B6%E6%9E%84"><span class="nav-number">1.5.0.8.</span> <span class="nav-text">自动编码器架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E5%8D%B7%E7%A7%AF%E9%87%87%E6%A0%B7"><span class="nav-number">1.5.0.9.</span> <span class="nav-text">完全卷积采样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E6%8E%A9%E6%A8%A1"><span class="nav-number">1.5.0.10.</span> <span class="nav-text">分割掩模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%83%8F%E7%B4%A0%E7%BA%A7%E6%88%96%E4%BD%93%E7%B4%A0%E7%BA%A7"><span class="nav-number">1.5.0.11.</span> <span class="nav-text">像素级或体素级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%85%83%E5%8A%BF%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.0.12.</span> <span class="nav-text">二元势函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E9%98%B6%E5%8A%BF%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.0.13.</span> <span class="nav-text">高阶势函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%84%9F%E7%9F%A5%E6%8D%9F%E5%A4%B1"><span class="nav-number">1.5.0.14.</span> <span class="nav-text">感知损失</span></a></li></ol></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Farewellswind</p>
-  <div class="site-description" itemprop="description">Blog to record sth. powered by GitPages & Hexo</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
+          <i class='fa fa-copy fa-fw'></i> 复制文本
+        </span>
+        <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='copyPaste'>
+          
+          <i class='fa fa-paste fa-fw mR12'></i> 粘贴文本
+        </span>
+        <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='copySelect'>
+          
+          <i class='fa fa-object-ungroup fa-fw mR12'></i> 全选文本
+        </span>
+        <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='copyCut'>
+          
+          <i class='fa fa-cut fa-fw mR12'></i> 剪切文本
+        </span>
+        <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='openTab'>
+          
+          <i class='fa fa-external-link-square-alt fa-fw mR12'></i> 在新标签页打开
+        </span>
+        <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='copySrc'>
+          
+          <i class='fa fa-image fa-fw mR12'></i> 复制图片地址
+        </span>
+        <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='copyImg'>
+          
+          <i class='fa fa-images fa-fw mR12'></i> 复制图片文件
+        </span>
+      </li>
+      
         
-          <span class="site-state-item-count">5</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
+      
+        
+          <hr class="menuLoad-Content">
+        
+      
+        
+          
+    <li class="menuLoad-Content">
+      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/faqs/
+        
+        
+        
+        
+          id="https:volantisjsorgfaqs"
+        
+      >
+        <i class='fa fa-question fa-fw'></i> 常见问题
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li class="menuLoad-Content">
+      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/examples/
+        
+        
+        
+        
+          id="https:volantisjsorgexamples"
+        
+      >
+        <i class='fa fa-rss fa-fw'></i> 示例博客
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li class="menuLoad-Content">
+      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/contributors/
+        
+        
+        
+        
+          id="https:volantisjsorgcontributors"
+        
+      >
+        <i class='fa fa-fan fa-spin fa-fw'></i> 加入社区
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr class="menuLoad-Content">
+        
+      
+        
+          
+    <li class="menuLoad-Content">
+      <a class='vlts-menu fix-cursor-default' href=https://github.com/volantis-x/volantis-docs/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xvolantis-docs"
+        
+      >
+        <i class='fa fa-code-branch fa-fw'></i> 本站源码
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li class="menuLoad-Content">
+      <a class='vlts-menu fix-cursor-default' href=https://github.com/volantis-x/hexo-theme-volantis/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xhexo-theme-volantis"
+        
+      >
+        <i class='fa fa-code-branch fa-fw'></i> 主题源码
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr class="menuLoad-Content">
+        
+      
+        
+          <li class='option menuOption-Content'>
+            <span class='vlts-menu opt fix-cursor-default' id='printHtml'>
+              <i class='fa fa-print fa-fw '></i> 打印页面
+            </span>
+          </li>  
+        
+      
+        
+          <li class='option menuOption-Content'>
+            <span class='vlts-menu opt fix-cursor-default toggle-mode-btn' id='menuDarkBtn'>
+              <i class='fa fa-moon fa-fw '></i> 暗黑模式
+            </span>
+          </li>
+        
+      
+        
+          <li class='option menuOption-Content'>
+            <span class='vlts-menu opt fix-cursor-default' id='readingModel'>
+              <i class='fa fa-book-open fa-fw '></i> 阅读模式
+            </span>
+          </li>  
+        
+      
+        
+      
+    </ul>
+  </div>
+  <script>
+    volantis.rightMenu = {};
+    volantis.rightMenu.faicon = 'fa' || 'fa';
+    
+    
+      volantis.rightMenu.defaultStyles = true;
+    
+    
+    
+    
+    
+      volantis.APlayerController = {};
+    
+    volantis.js('/js/rightMenu.js?time=1634014532470')
+  </script>
 
 
 
-      </div>
+<!-- rightmenu要在darkmode之前（ToggleButton） darkmode要在comments之前（volantis.dark.push）-->
 
+
+
+<script>
+  function loadIssuesJS() {
+    
+      const sites_api = document.getElementById('sites-api');
+      if (sites_api != undefined && typeof SitesJS === 'undefined') {
+        volantis.js("/js/plugins/sites.js?time=1634014532470")
+      }
+    
+    
+      const friends_api = document.getElementById('friends-api');
+      if (friends_api != undefined && typeof FriendsJS === 'undefined') {
+        volantis.js("/js/plugins/friends.js?time=1634014532470")
+      }
+    
+    
+      const contributors_api = document.getElementById('contributors-api');
+      if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
+        volantis.js("/js/plugins/contributors.js?time=1634014532470")
+      }
+    
+  };
+  loadIssuesJS()
+  volantis.pjax.push(()=>{
+    loadIssuesJS();
+  })
+
+</script>
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: ["#"],
+	maxRPS: 6,
+	hoverDelay: 0
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+  <script>
+  volantis.layoutHelper("comments",`<div id="giscus_container"></div>`)
+
+  volantis.giscus = {};
+
+  function check_giscus() {
+    if (volantis.dark.mode === "dark") {
+      volantis.giscus.Theme = 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/css/giscus/dark.css';
+    } else {
+      volantis.giscus.Theme = 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/css/giscus/light.css';
+    }
+
+    return document.getElementById("giscus_container");
+  }
+
+  function pjax_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+    let cfg = {"theme":{"light":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/css/giscus/light.css","dark":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/css/giscus/dark.css"}}
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://giscus.app/client.js');
+    Object.keys(cfg).forEach(k=>{
+      if (k != "theme") {
+        script.setAttribute('data-'+k, cfg[k]);
+      }
+    })
+    script.setAttribute('data-theme', volantis.giscus.Theme);
+    script.setAttribute('crossorigin', "anonymous");
+    HEAD.appendChild(script);
+  }
+
+  function dark_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+
+    const message = {
+      setConfig: {
+        theme: volantis.giscus.Theme
+      }
+    };
+    const giscusIframe = document.querySelector('iframe.giscus-frame');
+    giscusIframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+  }
+  pjax_giscus();
+  volantis.pjax.push(pjax_giscus);
+  volantis.dark.push(dark_giscus);
+</script>
+
+
+
+
+
+
+<script src="/js/app.js?time=1634014532470.js"></script>
+
+
+<!-- optional -->
+
+  <script>
+  const SearchServiceDataPathRoot = ("/" || "/").endsWith("/")
+    ? "/" || "/"
+    : "//" || "/";
+  const SearchServiceDataPath = SearchServiceDataPathRoot + "content.json";
+
+  function loadSearchScript() {
+    // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
+    return volantis.js("/js/search/hexo.js?time=1634014532470");
+  }
+
+  function loadSearchService() {
+    loadSearchScript();
+    document.querySelectorAll(".input.u-search-input").forEach((e) => {
+      e.removeEventListener("focus", loadSearchService, false);
+    });
+  }
+
+  // 打开并搜索 字符串 s
+  function OpenSearch(s) {
+    loadSearchScript().then(() => {
+      SearchService.setQueryText(s);
+      SearchService.search();
+    });
+  }
+
+  // 访问含有 ?s=xxx  的链接时打开搜索 // 与搜索引擎 structured data 相关: /scripts/helpers/structured-data/lib/config.js
+  if (window.location.search && /^\?s=/g.test(window.location.search)) {
+    let queryText = decodeURI(window.location.search)
+      .replace(/\ /g, "-")
+      .replace(/^\?s=/g, "");
+    OpenSearch(queryText);
+  }
+
+  // 搜索输入框获取焦点时加载搜索
+  document.querySelectorAll(".input.u-search-input").forEach((e) => {
+    e.addEventListener("focus", loadSearchService, false);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+
+
+
+  function pjax_highlightjs_copyCode(){
+    if (!(document.querySelector(".highlight .code pre") ||
+      document.querySelector(".article pre code"))) {
+      return;
+    }
+    VolantisApp.copyCode(".highlight .code pre, .article pre code")
+  }
+  volantis.requestAnimationFrame(pjax_highlightjs_copyCode)
+  volantis.pjax.push(pjax_highlightjs_copyCode)
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- pjax 标签必须存在于所有页面 否则 pjax error -->
+<pjax>
+
+</pjax>
+
+<script>
+  function listennSidebarTOC() {
+    const navItems = document.querySelectorAll(".toc li");
+    if (!navItems.length) return;
+    const sections = [...navItems].map((element) => {
+      const link = element.querySelector(".toc-link");
+      const target = document.getElementById(
+        decodeURI(link.getAttribute("href")).replace("#", "")
+      );
+      // 解除 a 标签 href 的 锚点定位, a 标签 href 的 锚点定位 会随机启用?? 产生错位???
+      link.setAttribute("onclick","return false;")
+      link.setAttribute("toc-action","toc-"+decodeURI(link.getAttribute("href")).replace("#", ""))
+      link.setAttribute("href","/")
+      // 配置 点击 触发新的锚点定位
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+         // 这里的 addTop 是通过错位使得 toc 自动展开.
+        volantis.scroll.to(target,{addTop: 5, observer:true})
+      });
+      return target;
+    });
+
+    function activateNavByIndex(target) {
+      if (target.classList.contains("active-current")) return;
+
+      document.querySelectorAll(".toc .active").forEach((element) => {
+        element.classList.remove("active", "active-current");
+      });
+      target.classList.add("active", "active-current");
+      let parent = target.parentNode;
+      while (!parent.matches(".toc")) {
+        if (parent.matches("li")) parent.classList.add("active");
+        parent = parent.parentNode;
+      }
+    }
+
+    function findIndex(entries) {
+      let index = 0;
+      let entry = entries[index];
+      if (entry.boundingClientRect.top > 0) {
+        index = sections.indexOf(entry.target);
+        return index === 0 ? 0 : index - 1;
+      }
+      for (; index < entries.length; index++) {
+        if (entries[index].boundingClientRect.top <= 0) {
+          entry = entries[index];
+        } else {
+          return sections.indexOf(entry.target);
+        }
+      }
+      return sections.indexOf(entry.target);
+    }
+
+    function createIntersectionObserver(marginTop) {
+      marginTop = Math.floor(marginTop + 10000);
+      let intersectionObserver = new IntersectionObserver(
+        (entries, observe) => {
+          let scrollHeight = document.documentElement.scrollHeight;
+          if (scrollHeight > marginTop) {
+            observe.disconnect();
+            createIntersectionObserver(scrollHeight);
+            return;
+          }
+          let index = findIndex(entries);
+          activateNavByIndex(navItems[index]);
+        }, {
+          rootMargin: marginTop + "px 0px -100% 0px",
+          threshold: 0,
+        }
+      );
+      sections.forEach((element) => {
+        element && intersectionObserver.observe(element);
+      });
+    }
+
+    createIntersectionObserver(document.documentElement.scrollHeight);
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+  document.addEventListener("pjax:success", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+</script>
+
+<script>
+  // https://web.dev/content-visibility/
+  // https://www.caniuse.com/?search=content-visibility
+  // https://infrequently.org/2020/12/content-visibility-scroll-fix/
+  // https://infrequently.org/2020/12/resize-resilient-deferred-rendering/
+
+  // 备注 目前已知的问题:
+  // 动态修改导致的内容高度变化(例如评论框异步渲染的外部盒子高度变化) 无法提前获知, 进而导致的首次滚动条跳动无法去除 (wontfix) 事实上不使用 content-visibility 也会有跳动, 不过是比使用 content-visibility 跳动提前
+  // scrollreveal 插件潜在问题 目前尚不明确
+
+  let eqIsh = (a, b, fuzz = 2) => {
+    return Math.abs(a - b) <= fuzz;
+  };
+
+  let rectNotEQ = (a, b) => {
+    return !eqIsh(a.width, b.width) || !eqIsh(a.height, b.height);
+  };
+
+  // Keep a map of elements and the dimensions of
+  // their place-holders, re-setting the element's
+  // intrinsic size when we get updated measurements
+  // from observers.
+  let spaced = new WeakMap();
+
+  // Only call this when known cheap, post layout
+  let reserveSpace = (el, rect = el.getClientBoundingRect()) => {
+    let old = spaced.get(el);
+    // Set intrinsic size to prevent jumping on un-painting:
+    //    https://drafts.csswg.org/css-sizing-4/#intrinsic-size-override
+    if (!old || rectNotEQ(old, rect)) {
+      spaced.set(el, rect);
+      el.style["contain-intrinsic-size"] = `${rect.width}px ${rect.height}px`;
+    }
+  };
+
+  let iObs = new IntersectionObserver(
+    (entries, o) => {
+      entries.forEach((entry) => {
+        // We don't care if the element is intersecting or
+        // has been laid out as our page structure ensures
+        // they'll get the right width.
+        reserveSpace(entry.target, entry.boundingClientRect);
+      });
+    },
+    { rootMargin: "500px 0px 500px 0px" }
+  );
+
+  let rObs = new ResizeObserver((entries, o) => {
+    entries.forEach((entry) => {
+      reserveSpace(entry.target, entry.contentRect);
+    });
+  });
+
+  let resizeResilientDeferredRendering = (Selector) => {
+    let articles = document.querySelectorAll(Selector);
+
+    if (articles.length) {
+      articles.forEach((el) => {
+        iObs.observe(el);
+        rObs.observe(el);
+      });
+
+      // Workaround for Chrome bug, part 2.
+      //
+      // Re-enable browser management of rendering for the
+      // first article after the first paint. Double-rAF
+      // to ensure we get called after a layout.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          articles[0].style["content-visibility"] = "auto";
+        });
+      });
+    }
+  };
+
+  let contentVisibilityScrollFix = () => {
+    if (!("content-visibility" in document.documentElement.style)) {
+      return;
+    }
+    resizeResilientDeferredRendering(".post-story");
+    resizeResilientDeferredRendering("article");
+    resizeResilientDeferredRendering(".post-wrapper");
+  };
+  contentVisibilityScrollFix();
+  volantis.pjax.push(contentVisibilityScrollFix);
+</script>
+
+
+
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Lethe","url":"http://lethewind.github.io/","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Farewellswind","image":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png"},"url":"http://lethewind.github.io/","sameAs":["https://github.com/volantis-x"],"description":"Blog to record sth. powered by GitPages & Hexo"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://lethewind.github.io/","name":"Lethe"}},{"@type":"ListItem","position":3,"item":{"@id":"http://lethewind.github.io/2021/10/11/Generative adversarial network in medical imaging A review/","name":"Generative adversarial network in medical imaging A review"}}]},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Generative adversarial network in medical imaging A review","description":"","datePublished":"2021-10-11T05:41:49.000Z","dateModified":"2021-10-11T15:45:28.601Z","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/"},"author":{"@type":"Person","name":"Farewellswind","image":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png"},"url":"http://lethewind.github.io/"},"publisher":{"@type":"Organization","name":"Lethe","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://lethewind.github.io/2021/10/11/Generative%20adversarial%20network%20in%20medical%20imaging%20A%20review/","wordCount":0,"keywords":"GAN, 生成对抗网络, Medical imaging, 医学图像","image":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+
+
+<!-- more -->
+
+
+
+      
+        <!-- 
+  pjax重载区域接口：
+  1.  <pjax></pjax> 标签 pjax 标签必须存在于所有页面 否则 pjax error
+  2.  script[data-pjax]
+  3.  .pjax-reload script
+  4.  .pjax
+-->
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
+        selectors: [
+          "title",
+          
+          "#l_main",
+          "#pjax-header-nav-list",
+          ".pjax",
+          "pjax", // <pjax></pjax> 标签
+          "script[data-pjax], .pjax-reload script" // script标签添加data-pjax 或 script标签外层添加.pjax-reload 的script代码段重载
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.complete.start();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.error.start();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+      
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
+  <!-- Custom Files bodyEnd begin-->
   
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Farewellswind</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-</body>
+  <!-- Custom Files bodyEnd end-->
+  </body>
 </html>
