@@ -6,7 +6,8 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://denglin.github.io',
+	site: 'https://Lethewind.github.io',
+	base: '/denglin.github.io',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{
