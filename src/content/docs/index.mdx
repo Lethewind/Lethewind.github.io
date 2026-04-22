@@ -1,40 +1,42 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: Lethewind 的数字花园
+description: 记录写作、技术、阅读和日常思考。
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: 一个持续更新的个人博客，用来沉淀文章、笔记和长期项目。
   image:
     file: ../../assets/houston.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: 阅读第一篇文章
+      link: /blog/first-post/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
-      variant: minimal
+    - text: 认识一下我
+      link: /about/
+      icon: right-arrow
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## 这里会写些什么
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="博客文章" icon="document">
+		发布完整文章，记录做过的项目、踩过的坑和一些值得展开说的主题。
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="日常笔记" icon="open-book">
+		沉淀短内容，比如工具用法、灵感片段、调试记录和阅读摘记。
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="写作流程" icon="pencil">
+		先在 `src/content/docs` 下新增 Markdown 文件，本地预览后再推送到 GitHub 自动发布。
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="个人主页" icon="user">
+		把这里当作长期维护的个人站，逐步补齐关于我、项目、文章与归档页面。
 	</Card>
 </CardGrid>
+
+## 开始更新
+
+- 写新文章：在 `src/content/docs/blog` 下新增 `.md` 或 `.mdx` 文件。
+- 写短笔记：在 `src/content/docs/notes` 下新增文档。
+- 修改导航：编辑 `astro.config.mjs` 里的 `sidebar` 配置。
+- 发布内容：`git push` 后会自动触发 GitHub Pages 部署。

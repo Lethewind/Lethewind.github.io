@@ -13,15 +13,16 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Lethewind' }],
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
+					label: '博客',
+					autogenerate: { directory: 'blog' },
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: '笔记',
+					autogenerate: { directory: 'notes' },
+				},
+				{
+					label: '关于我',
+					items: [{ label: '个人介绍', slug: 'about' }],
 				},
 			],
 		}),
